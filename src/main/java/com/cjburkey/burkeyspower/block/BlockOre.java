@@ -8,9 +8,9 @@ public class BlockOre extends Block {
 	
 	public BlockOre(float hardness) {
 		super(Material.GROUND);
-		this.setSoundType(SoundType.METAL);
-		this.setHardness(hardness);
-		this.setHarvestLevel("pickaxe", 2);
+		setSoundType(SoundType.METAL);
+		setHardness(hardness);
+		setHarvestLevel("pickaxe", 2);
 	}
 	
 }

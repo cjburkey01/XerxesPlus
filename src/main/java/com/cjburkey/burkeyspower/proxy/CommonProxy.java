@@ -3,6 +3,7 @@ package com.cjburkey.burkeyspower.proxy;
 import com.cjburkey.burkeyspower.BurkeysPower;
 import com.cjburkey.burkeyspower.crafting.FurnaceRecipe;
 import com.cjburkey.burkeyspower.item.ModItems;
+import com.cjburkey.burkeyspower.tile.ModTiles;
 import com.cjburkey.burkeyspower.world.BurkeysPowerOreGeneration;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.event.FMLConstructionEvent;
@@ -26,6 +27,9 @@ public class CommonProxy {
 		config = new Configuration(e.getSuggestedConfigurationFile());
 		config.load();
 		config.save();
+
+		BurkeysPower.logger.info("Registering tile entities");
+		ModTiles.commonPreinit();
 		
 		ModItems.tabBurkeysPower.setBackgroundImageName("burkeyspower_background.png");
 	}

@@ -8,9 +8,9 @@ public class BlockMetal extends Block {
 	
 	public BlockMetal() {
 		super(Material.IRON);
-		this.setSoundType(SoundType.METAL);
-		this.setHardness(3.5f);
-		this.setHarvestLevel("pickaxe", 2);
+		setSoundType(SoundType.METAL);
+		setHardness(3.5f);
+		setHarvestLevel("pickaxe", 2);
 	}
 	
 }
