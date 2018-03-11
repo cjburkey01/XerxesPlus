@@ -3,6 +3,9 @@ itemGroup.tab_burkeyspower=Burkey's Power
 tile.block_debug.name=Debug Test Block
 tile.block_meticulum.name=Meticulum Block
 tile.block_meticulum_ore.name=Meticulum Ore
+tile.block_container_basic.name=Basic Container
+
+tile_container_basic=Basic Container
 
 item.item_debug.name=Debug Test Item
 item.dust_meticulum.name=Meticulum Dust

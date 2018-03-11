@@ -18,12 +18,14 @@ public class ModBlocks {
 	
 	public static Block blockMeticulum;
 	public static Block blockMeticulumOre;
+	public static Block blockContainerBasic;
 	
 	private static void createBlocks() {
 		blockDebug = createBlock(new Block(Material.GROUND), "block_debug").setCreativeTab(null);
 		
 		blockMeticulum = createBlock(new BlockMetal(), "block_meticulum");
 		blockMeticulumOre = createBlock(new BlockOre(2.5f), "block_meticulum_ore");
+		blockContainerBasic = createBlock(new BlockContainerBasic(), "block_container_basic");
 	}
 	
 	// -- STATIC BLOCK REGISTRATION -- //
