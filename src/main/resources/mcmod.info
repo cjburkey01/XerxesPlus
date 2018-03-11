@@ -1,0 +1,16 @@
+[
+{
+  "modid": "${modid}",
+  "name": "${modname}",
+  "description": "A mod that adds many power-based items.",
+  "version": "${mcversion}_${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["CJ Burkey"],
+  "credits": "The Forge and FML guys, for making Forge.",
+  "logoFile": "logo.png",
+  "screenshots": [],
+  "dependencies": []
+}
+]

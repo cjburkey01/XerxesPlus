@@ -1,0 +1,10 @@
+itemGroup.tab_burkeyspower=Burkey's Power
+
+tile.block_debug.name=Debug Test Block
+tile.block_meticulum.name=Meticulum Block
+tile.block_meticulum_ore.name=Meticulum Ore
+
+item.item_debug.name=Debug Test Item
+item.dust_meticulum.name=Meticulum Dust
+item.ingot_meticulum.name=Meticulum Ingot
+item.nugget_meticulum.name=Meticulum Nugget

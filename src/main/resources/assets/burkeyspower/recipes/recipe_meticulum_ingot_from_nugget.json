@@ -1,0 +1,17 @@
+{
+    "type": "forge:ore_shaped",
+    "pattern": [
+        "xxx",
+        "xxx",
+        "xxx"
+    ],
+    "key": {
+        "x": {
+            "type": "forge:ore_dict",
+            "ore": "nuggetMeticulum"
+        }
+    },
+    "result": {
+        "item": "burkeyspower:ingot_meticulum"
+    }
+}
