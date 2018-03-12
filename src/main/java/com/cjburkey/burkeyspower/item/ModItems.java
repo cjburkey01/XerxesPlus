@@ -50,7 +50,7 @@ public class ModItems {
 	public static final CreativeTabs tabBurkeysPower = new CreativeTabs("tab_burkeyspower") {
 		@SideOnly(Side.CLIENT)
 		public ItemStack getTabIconItem() {
-			return new ItemStack(itemDebug, 1);
+			return new ItemStack(ModItems.meticulumIngot, 1);
 		}
 	};
 	

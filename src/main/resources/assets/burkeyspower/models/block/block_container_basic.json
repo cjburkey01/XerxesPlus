@@ -1,6 +1,12 @@
 {
-    "parent": "block/cube_all",
+    "parent": "block/cube",
     "textures": {
-        "all": "burkeyspower:blocks/block_container_basic"
+        "particle": "burkeyspower:blocks/block_container_basic",
+        "down": "burkeyspower:blocks/block_container_basic_bottom",
+        "up": "burkeyspower:blocks/block_container_basic_top",
+        "north": "burkeyspower:blocks/block_container_basic",
+        "east": "burkeyspower:blocks/block_container_basic",
+        "south": "burkeyspower:blocks/block_container_basic",
+        "west": "burkeyspower:blocks/block_container_basic"
     }
 }

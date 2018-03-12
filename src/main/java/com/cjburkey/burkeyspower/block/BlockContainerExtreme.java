@@ -3,7 +3,7 @@ package com.cjburkey.burkeyspower.block;
 import com.cjburkey.burkeyspower.BurkeysPower;
 import com.cjburkey.burkeyspower.container.ContainerInventory.InventoryDefinition;
 import com.cjburkey.burkeyspower.proxy.CommonProxy;
-import com.cjburkey.burkeyspower.tile.TileEntityContainerBasic;
+import com.cjburkey.burkeyspower.tile.TileEntityContainerExtreme;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -18,11 +18,11 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BlockContainerBasic extends BlockContainer {
+public class BlockContainerExtreme extends BlockContainer {
 	
-	public static InventoryDefinition INV_DEF = new InventoryDefinition(176, 166, 9, 3, 8, 18, 58, 8, 84);
+	public static InventoryDefinition INV_DEF = new InventoryDefinition(248, 240, 13, 7, 8, 18, 58, 44, 158);
 	
-	public BlockContainerBasic() {
+	public BlockContainerExtreme() {
 		super(Material.IRON);
 		setHardness(1.0f);
 		setHarvestLevel("pickaxe", 1);
@@ -31,7 +31,7 @@ public class BlockContainerBasic extends BlockContainer {
 	
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer ply, EnumHand hand, EnumFacing facing, float x, float y, float z) {
 		if (!world.isRemote) {
-			ply.openGui(BurkeysPower.instance, CommonProxy.guiBasicContainerId, world, pos.getX(), pos.getY(), pos.getZ());
+			ply.openGui(BurkeysPower.instance, CommonProxy.guiExtremeContainerId, world, pos.getX(), pos.getY(), pos.getZ());
 		}
 		return true;
 	}
@@ -46,7 +46,7 @@ public class BlockContainerBasic extends BlockContainer {
 	}
 	
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
-		return new TileEntityContainerBasic();
+		return new TileEntityContainerExtreme();
 	}
 	
 }

@@ -1,6 +1,5 @@
 package com.cjburkey.burkeyspower.container;
 
-import com.cjburkey.burkeyspower.BurkeysPower;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
@@ -30,43 +29,39 @@ public class ContainerInventory extends Container {
 			}
 		}
 		
-		// Hotbar slots
-		for (int x = 0; x < 9; x ++) {
-			addSlotToContainer(new Slot(playerInv, x, invDef.getStartPlyX() + x * slotSkip, invDef.getStartPlyY() + invDef.getHotbarOffset()));
-		}
-		
 		// Player Inventory Slots
 		for (int y = 0; y < 3; y ++) {
 			for (int x = 0; x < 9; x ++) {
 				addSlotToContainer(new Slot(playerInv, 9 + y * 9 + x, invDef.getStartPlyX() + x * slotSkip, invDef.getStartPlyY() + y * slotSkip));
 			}
 		}
+		
+		// Hotbar slots
+		for (int x = 0; x < 9; x ++) {
+			addSlotToContainer(new Slot(playerInv, x, invDef.getStartPlyX() + x * slotSkip, invDef.getStartPlyY() + invDef.getHotbarOffset()));
+		}
 	}
 	
-	public ItemStack transferStackInSlot(EntityPlayer ply, int fromSlot) {
-		ItemStack previous = ItemStack.EMPTY;
-		Slot slot = inventorySlots.get(fromSlot);
-		if(slot != null && slot.getHasStack()) {
-			ItemStack current = slot.getStack();
-			previous = current.copy();
-			if(fromSlot < inventory.getSizeInventory()) {
-				if(!mergeItemStack(current, inventory.getSizeInventory(), inventory.getSizeInventory() + 36, true)) {
+	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
+		ItemStack stack = ItemStack.EMPTY;
+		Slot slot = inventorySlots.get(index);
+		if (slot != null && slot.getHasStack()) {
+			ItemStack stackInSlot = slot.getStack();
+			stack = stackInSlot.copy();
+			if (index < inventory.getSizeInventory()) {
+				if (!mergeItemStack(stackInSlot, inventory.getSizeInventory(), inventorySlots.size(), true)) {
 					return ItemStack.EMPTY;
 				}
-			} else {
+			} else if (!mergeItemStack(stackInSlot, 0, inventory.getSizeInventory(), false)) {
 				return ItemStack.EMPTY;
 			}
-			if(current.getCount() == 0) {
+			if (stackInSlot.isEmpty()) {
 				slot.putStack(ItemStack.EMPTY);
 			} else {
 				slot.onSlotChanged();
 			}
-			if(current.getCount() == previous.getCount()) {
-				return ItemStack.EMPTY;
-			}
-			slot.onTake(ply, current);
 		}
-		return previous;
+		return stack;
 	}
 	
 	public boolean canInteractWith(EntityPlayer ply) {
@@ -75,6 +70,8 @@ public class ContainerInventory extends Container {
 	
 	public static class InventoryDefinition {
 		
+		private int width;
+		private int height;
 		private int slotsX;
 		private int slotsY;
 		private int startInvX;
@@ -83,7 +80,9 @@ public class ContainerInventory extends Container {
 		private int startPlyX;
 		private int startPlyY;
 		
-		public InventoryDefinition(int slotsX, int slotsY, int startInvX, int startInvY, int hotbarOffset, int startPlyX, int startPlyY) {
+		public InventoryDefinition(int width, int height, int slotsX, int slotsY, int startInvX, int startInvY, int hotbarOffset, int startPlyX, int startPlyY) {
+			this.width = width;
+			this.height = height;
 			this.slotsX = slotsX;
 			this.slotsY = slotsY;
 			this.startInvX = startInvX;
@@ -91,6 +90,14 @@ public class ContainerInventory extends Container {
 			this.hotbarOffset = hotbarOffset;
 			this.startPlyX = startPlyX;
 			this.startPlyY = startPlyY;
+		}
+		
+		public int getWidth() {
+			return width;
+		}
+		
+		public int getHeight() {
+			return height;
 		}
 		
 		public int getSlotsX() {

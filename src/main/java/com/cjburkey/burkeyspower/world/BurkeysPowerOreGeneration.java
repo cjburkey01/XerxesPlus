@@ -23,7 +23,7 @@ public class BurkeysPowerOreGeneration implements IWorldGenerator {
 	
 	public BurkeysPowerOreGeneration() {
 		// Y-level 5 to 16 in dimension 0(overworld)
-		generators.add(new WorldGenDefinition(5, 16, 4, new int[] { 0 }, ModBlocks.blockMeticulumOre, new int[] { 1, 3, 5 }));
+		generators.add(new WorldGenDefinition(5, 16, 2, new int[] { 0 }, ModBlocks.blockMeticulumOre, new int[] { 1, 2, 3 }));
 	}
 	
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {

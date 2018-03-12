@@ -19,6 +19,8 @@ public class ModBlocks {
 	public static Block blockMeticulum;
 	public static Block blockMeticulumOre;
 	public static Block blockContainerBasic;
+	public static Block blockContainerAdvanced;
+	public static Block blockContainerExtreme;
 	
 	private static void createBlocks() {
 		blockDebug = createBlock(new Block(Material.GROUND), "block_debug").setCreativeTab(null);
@@ -26,6 +28,8 @@ public class ModBlocks {
 		blockMeticulum = createBlock(new BlockMetal(), "block_meticulum");
 		blockMeticulumOre = createBlock(new BlockOre(2.5f), "block_meticulum_ore");
 		blockContainerBasic = createBlock(new BlockContainerBasic(), "block_container_basic");
+		blockContainerAdvanced = createBlock(new BlockContainerAdvanced(), "block_container_advanced");
+		blockContainerExtreme = createBlock(new BlockContainerExtreme(), "block_container_extreme");
 	}
 	
 	// -- STATIC BLOCK REGISTRATION -- //

@@ -4,8 +4,12 @@ tile.block_debug.name=Debug Test Block
 tile.block_meticulum.name=Meticulum Block
 tile.block_meticulum_ore.name=Meticulum Ore
 tile.block_container_basic.name=Basic Container
+tile.block_container_advanced.name=Advanced Container
+tile.block_container_extreme.name=Extreme Container
 
 tile_container_basic=Basic Container
+tile_container_advanced=Advanced Container
+tile_container_extreme=Extreme Container
 
 item.item_debug.name=Debug Test Item
 item.dust_meticulum.name=Meticulum Dust

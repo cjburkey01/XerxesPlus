@@ -1,18 +1,23 @@
 package com.cjburkey.burkeyspower.proxy;
 
+import java.lang.reflect.InvocationTargetException;
 import com.cjburkey.burkeyspower.BurkeysPower;
+import com.cjburkey.burkeyspower.block.BlockContainerAdvanced;
+import com.cjburkey.burkeyspower.block.BlockContainerBasic;
+import com.cjburkey.burkeyspower.block.BlockContainerExtreme;
 import com.cjburkey.burkeyspower.container.ContainerInventory;
+import com.cjburkey.burkeyspower.container.ContainerInventory.InventoryDefinition;
 import com.cjburkey.burkeyspower.crafting.FurnaceRecipe;
+import com.cjburkey.burkeyspower.gui.GuiContainerAdvanced;
 import com.cjburkey.burkeyspower.gui.GuiContainerBasic;
+import com.cjburkey.burkeyspower.gui.GuiContainerExtreme;
 import com.cjburkey.burkeyspower.gui.GuiHandler;
 import com.cjburkey.burkeyspower.gui.GuiHandler.GuiRegister;
+import com.cjburkey.burkeyspower.gui.GuiInventoryBase;
 import com.cjburkey.burkeyspower.item.ModItems;
 import com.cjburkey.burkeyspower.tile.ModTiles;
-import com.cjburkey.burkeyspower.tile.TileEntityInventory;
 import com.cjburkey.burkeyspower.world.BurkeysPowerOreGeneration;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -29,17 +34,13 @@ public class CommonProxy {
 	public static Configuration config;
 	
 	public static int guiBasicContainerId;
+	public static int guiAdvancedContainerId;
+	public static int guiExtremeContainerId;
 	
 	private void registerGuis() {
-		// Container Basic
-		guiBasicContainerId = GuiHandler.addGui(new GuiRegister() {
-			public Object onServer(EntityPlayer player, World world, int x, int y, int z) {
-				return new ContainerInventory(GuiContainerBasic.INV_DEF, player.inventory, (IInventory) world.getTileEntity(new BlockPos(x, y, z)));
-			}
-			public Object onClient(EntityPlayer player, World world, int x, int y, int z) {
-				return new GuiContainerBasic(GuiContainerBasic.TEXTURE, 176, 166, player.inventory, (IInventory) world.getTileEntity(new BlockPos(x, y, z)));
-			}
-		});
+		guiBasicContainerId = GuiHandler.addGui(new GuiInventoryRegister(BlockContainerBasic.INV_DEF, GuiContainerBasic.class));
+		guiAdvancedContainerId = GuiHandler.addGui(new GuiInventoryRegister(BlockContainerAdvanced.INV_DEF, GuiContainerAdvanced.class));
+		guiExtremeContainerId = GuiHandler.addGui(new GuiInventoryRegister(BlockContainerExtreme.INV_DEF, GuiContainerExtreme.class));
 	}
 	
 	public void construction(FMLConstructionEvent e) {
@@ -78,6 +79,32 @@ public class CommonProxy {
 	
 	public void postinit(FMLPostInitializationEvent e) {
 		BurkeysPower.logger.info("Postinitializing Burkey's Power");
+	}
+	
+	public static class GuiInventoryRegister extends GuiRegister {
+		
+		private InventoryDefinition invDef;
+		private Class<? extends GuiInventoryBase> guiClass;
+		
+		public GuiInventoryRegister(InventoryDefinition invDef, Class<? extends GuiInventoryBase> guiClass) {
+			this.invDef = invDef;
+			this.guiClass = guiClass;
+		}
+		
+		public Object onServer(EntityPlayer player, World world, int x, int y, int z) {
+			return new ContainerInventory(invDef, player.inventory, (IInventory) world.getTileEntity(new BlockPos(x, y, z)));
+		}
+		
+		public Object onClient(EntityPlayer player, World world, int x, int y, int z) {
+			try {
+				return guiClass.getConstructor(IInventory.class, IInventory.class).newInstance(player.inventory, (IInventory) world.getTileEntity(new BlockPos(x, y, z)));
+			} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
+				BurkeysPower.logger.error("Failed to create inventory GUI on client: " + e.getMessage());
+				e.printStackTrace();
+			}
+			return null;
+		}
+		
 	}
 	
 }
