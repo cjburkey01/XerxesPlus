@@ -12,8 +12,8 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 
 
 version = "1.0.0"
-group = "com.cjburkey.burkeyspower" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "burkeyspower"
+group = "com.cjburkey.xerxesplus" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "xerxesplus"
 mname = "Xerxes Plus"
 
 sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.

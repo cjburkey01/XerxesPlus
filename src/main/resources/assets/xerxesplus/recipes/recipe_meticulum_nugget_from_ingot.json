@@ -1,0 +1,13 @@
+{
+    "type": "forge:ore_shapeless",
+    "ingredients": [
+        {
+            "type": "forge:ore_dict",
+            "ore": "ingotMeticulum"
+        }
+    ],
+    "result": {
+        "item": "xerxesplus:nugget_meticulum",
+        "count": 9
+    }
+}

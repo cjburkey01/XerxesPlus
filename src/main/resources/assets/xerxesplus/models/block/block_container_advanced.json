@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "xerxesplus:blocks/block_container_advanced",
+        "down": "xerxesplus:blocks/block_container_advanced_bottom",
+        "up": "xerxesplus:blocks/block_container_advanced_top",
+        "north": "xerxesplus:blocks/block_container_advanced",
+        "east": "xerxesplus:blocks/block_container_advanced",
+        "south": "xerxesplus:blocks/block_container_advanced",
+        "west": "xerxesplus:blocks/block_container_advanced"
+    }
+}
