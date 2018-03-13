@@ -21,6 +21,7 @@ public class ModBlocks {
 	public static Block blockContainerBasic;
 	public static Block blockContainerAdvanced;
 	public static Block blockContainerExtreme;
+	public static Block blockXpStore;
 	
 	private static void createBlocks() {
 		blockDebug = createBlock(new Block(Material.GROUND), "block_debug").setCreativeTab(null);
@@ -30,6 +31,7 @@ public class ModBlocks {
 		blockContainerBasic = createBlock(new BlockContainerBasic(), "block_container_basic");
 		blockContainerAdvanced = createBlock(new BlockContainerAdvanced(), "block_container_advanced");
 		blockContainerExtreme = createBlock(new BlockContainerExtreme(), "block_container_extreme");
+		blockXpStore = createBlock(new BlockXpStore(), "block_xp_store");
 	}
 	
 	// -- STATIC BLOCK REGISTRATION -- //

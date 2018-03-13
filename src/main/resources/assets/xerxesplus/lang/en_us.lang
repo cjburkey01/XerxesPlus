@@ -6,10 +6,21 @@ tile.block_meticulum_ore.name=Meticulum Ore
 tile.block_container_basic.name=Basic Container
 tile.block_container_advanced.name=Advanced Container
 tile.block_container_extreme.name=Extreme Container
+tile.block_xp_store.name=XP Storage
 
 tile_container_basic=Basic Container
 tile_container_advanced=Advanced Container
 tile_container_extreme=Extreme Container
+tile_xp_store=XP Storage
+
+xp_add_one=Add One Level
+xp_add_five=Add Five Levels
+xp_add_all=Add All Levels
+xp_take_one=Take One Level
+xp_take_five=Take Five Levels
+xp_take_all=Take All Levels
+xp_levels=Levels
+xp_singles=Experience
 
 item.item_debug.name=Debug Test Item
 item.dust_meticulum.name=Meticulum Dust

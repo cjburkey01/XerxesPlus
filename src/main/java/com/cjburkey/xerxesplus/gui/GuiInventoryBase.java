@@ -2,19 +2,21 @@ package com.cjburkey.xerxesplus.gui;
 
 import com.cjburkey.xerxesplus.container.ContainerInventory;
 import com.cjburkey.xerxesplus.container.ContainerInventory.InventoryDefinition;
+import com.cjburkey.xerxesplus.tile.TileEntityInventory;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.Mod;
 
 public class GuiInventoryBase extends GuiContainer {
 	
-	private IInventory playerInv;
-	private IInventory inventory;
-	private ResourceLocation texture;
-	private InventoryDefinition invDef;
+	protected final IInventory playerInv;
+	protected final TileEntityInventory inventory;
+	protected final ResourceLocation texture;
+	protected final InventoryDefinition invDef;
 	
-	public GuiInventoryBase(InventoryDefinition invDef, ResourceLocation texture, IInventory player, IInventory inventory) {
+	public GuiInventoryBase(InventoryDefinition invDef, ResourceLocation texture, IInventory player, TileEntityInventory inventory) {
 		super(new ContainerInventory(invDef, player, inventory));
 		this.invDef = invDef;
 		playerInv = player;

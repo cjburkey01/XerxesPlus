@@ -5,18 +5,22 @@ import com.cjburkey.xerxesplus.XerxesPlus;
 import com.cjburkey.xerxesplus.block.BlockContainerAdvanced;
 import com.cjburkey.xerxesplus.block.BlockContainerBasic;
 import com.cjburkey.xerxesplus.block.BlockContainerExtreme;
+import com.cjburkey.xerxesplus.block.BlockXpStore;
 import com.cjburkey.xerxesplus.container.ContainerInventory;
 import com.cjburkey.xerxesplus.container.ContainerInventory.InventoryDefinition;
-import com.cjburkey.xerxesplus.crafting.PounderRecipe;
 import com.cjburkey.xerxesplus.crafting.FurnaceRecipe;
+import com.cjburkey.xerxesplus.crafting.PounderRecipe;
 import com.cjburkey.xerxesplus.gui.GuiContainerAdvanced;
 import com.cjburkey.xerxesplus.gui.GuiContainerBasic;
 import com.cjburkey.xerxesplus.gui.GuiContainerExtreme;
+import com.cjburkey.xerxesplus.gui.GuiContainerXpStore;
 import com.cjburkey.xerxesplus.gui.GuiHandler;
-import com.cjburkey.xerxesplus.gui.GuiInventoryBase;
 import com.cjburkey.xerxesplus.gui.GuiHandler.GuiRegister;
+import com.cjburkey.xerxesplus.gui.GuiInventoryBase;
 import com.cjburkey.xerxesplus.item.ModItems;
+import com.cjburkey.xerxesplus.packet.PacketHandler;
 import com.cjburkey.xerxesplus.tile.ModTiles;
+import com.cjburkey.xerxesplus.tile.TileEntityInventory;
 import com.cjburkey.xerxesplus.world.XerxesPlusOreGeneration;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -37,11 +41,15 @@ public class CommonProxy {
 	public static int guiBasicContainerId;
 	public static int guiAdvancedContainerId;
 	public static int guiExtremeContainerId;
+	public static int guiXpStoreId;
+	
+	public static int maxXp;
 	
 	private void registerGuis() {
 		guiBasicContainerId = GuiHandler.addGui(new GuiInventoryRegister(BlockContainerBasic.INV_DEF, GuiContainerBasic.class));
 		guiAdvancedContainerId = GuiHandler.addGui(new GuiInventoryRegister(BlockContainerAdvanced.INV_DEF, GuiContainerAdvanced.class));
 		guiExtremeContainerId = GuiHandler.addGui(new GuiInventoryRegister(BlockContainerExtreme.INV_DEF, GuiContainerExtreme.class));
+		guiXpStoreId = GuiHandler.addGui(new GuiInventoryRegister(BlockXpStore.INV_DEF, GuiContainerXpStore.class));
 	}
 	
 	public void construction(FMLConstructionEvent e) {
@@ -54,6 +62,9 @@ public class CommonProxy {
 		XerxesPlus.logger.info("Loading configuration");
 		config = new Configuration(e.getSuggestedConfigurationFile());
 		config.load();
+		
+		maxXp = config.getInt("maxXp", "xpStore", Integer.MAX_VALUE, 1, Integer.MAX_VALUE, "How much experience the XP Storage block may hold (this is NOT in levels).");
+		
 		config.save();
 
 		XerxesPlus.logger.info("Registering tile entities");
@@ -64,6 +75,9 @@ public class CommonProxy {
 
 		XerxesPlus.logger.info("Registering GUIs");
 		registerGuis();
+		
+		XerxesPlus.logger.info("Registering packets");
+		PacketHandler.commonPreinit();
 		
 		ModItems.tabXerxesPlus.setBackgroundImageName("xerxesplus_background.png");
 	}
@@ -101,7 +115,7 @@ public class CommonProxy {
 		
 		public Object onClient(EntityPlayer player, World world, int x, int y, int z) {
 			try {
-				return guiClass.getConstructor(IInventory.class, IInventory.class).newInstance(player.inventory, (IInventory) world.getTileEntity(new BlockPos(x, y, z)));
+				return guiClass.getConstructor(IInventory.class, TileEntityInventory.class).newInstance(player.inventory, (TileEntityInventory) world.getTileEntity(new BlockPos(x, y, z)));
 			} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
 				XerxesPlus.logger.error("Failed to create inventory GUI on client: " + e.getMessage());
 				e.printStackTrace();
