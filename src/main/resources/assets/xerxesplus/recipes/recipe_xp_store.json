@@ -1,0 +1,33 @@
+{
+    "type": "forge:ore_shaped",
+    "pattern": [
+        "yxy",
+        "zwz",
+        "vvv"
+    ],
+    "key": {
+        "x": {
+            "type": "forge:ore_dict",
+            "ore": "backplateMeticulum"
+        },
+        "y": {
+            "type": "forge:ore_dict",
+            "ore": "ingotGold"
+        },
+        "z": {
+            "type": "forge:ore_dict",
+            "ore": "ingotIron"
+        },
+        "w": {
+            "type": "forge:ore_dict",
+            "ore": "dustRedstone"
+        },
+        "v": {
+            "type": "forge:ore_dict",
+            "ore": "cobblestone"
+        }
+    },
+    "result": {
+        "item": "xerxesplus:block_xp_store"
+    }
+}

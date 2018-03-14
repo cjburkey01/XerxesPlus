@@ -29,20 +29,28 @@ public class ModItems {
 	public static Item meticulumIngot;
 	public static Item meticulumNugget;
 	
+	public static Item backplateIron;
+	public static Item backplateMeticulum;
+	
 	private static void createItems() {
 		itemDebug = createItem(new Item(), "item_debug").setCreativeTab(null);
 		
 		meticulumDust = createItem(new Item(), "dust_meticulum");
 		meticulumIngot = createItem(new Item(), "ingot_meticulum");
 		meticulumNugget = createItem(new Item(), "nugget_meticulum");
+		backplateIron = createItem(new Item(), "backplate_iron");
+		backplateMeticulum = createItem(new Item(), "backplate_meticulum");
 	}
 	
 	private static void createOreDictionary() {
-		OreDictionary.registerOre("ingotMeticulum", new ItemStack(ModItems.meticulumIngot));
-		OreDictionary.registerOre("nuggetMeticulum", new ItemStack(ModItems.meticulumNugget));
-		OreDictionary.registerOre("dustMeticulum", new ItemStack(ModItems.meticulumDust));
+		OreDictionary.registerOre("ingotMeticulum", new ItemStack(meticulumIngot));
+		OreDictionary.registerOre("nuggetMeticulum", new ItemStack(meticulumNugget));
+		OreDictionary.registerOre("dustMeticulum", new ItemStack(meticulumDust));
 		OreDictionary.registerOre("blockMeticulum", new ItemStack(ModBlocks.blockMeticulum));
 		OreDictionary.registerOre("oreMeticulum", new ItemStack(ModBlocks.blockMeticulumOre));
+		
+		OreDictionary.registerOre("backplateIron", new ItemStack(backplateIron));
+		OreDictionary.registerOre("backplateMeticulum", new ItemStack(backplateMeticulum));
 	}
 	
 	// -- STATIC ITEM REGISTRATION -- //
