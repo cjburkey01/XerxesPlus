@@ -4,6 +4,7 @@ import java.util.regex.Pattern;
 import com.cjburkey.xerxesplus.XerxesPlus;
 import com.cjburkey.xerxesplus.proxy.CommonProxy;
 import com.cjburkey.xerxesplus.tile.TileEntityXpStore;
+import com.cjburkey.xerxesplus.util.XpCalculation;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -62,7 +63,7 @@ public class PacketXpToServer implements IMessage {
 			TileEntity ent = ctx.getServerHandler().player.world.getTileEntity(pos);
 			if (ent != null && ent instanceof TileEntityXpStore) {
 				TileEntityXpStore xpStore = (TileEntityXpStore) ent;
-				return new PacketXpToClient(xpStore.getXpLevel(), xpStore.getXpStored(), CommonProxy.maxXp);
+				return new PacketXpToClient(xpStore.experienceLevel, (int) Math.floor(xpStore.experience * xpStore.getXpBarCapacity()), CommonProxy.maxXp);
 			}
 			return null;
 		}

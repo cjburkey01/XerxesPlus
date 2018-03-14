@@ -21,6 +21,7 @@ import com.cjburkey.xerxesplus.item.ModItems;
 import com.cjburkey.xerxesplus.packet.PacketHandler;
 import com.cjburkey.xerxesplus.tile.ModTiles;
 import com.cjburkey.xerxesplus.tile.TileEntityInventory;
+import com.cjburkey.xerxesplus.util.XpCalculation;
 import com.cjburkey.xerxesplus.world.XerxesPlusOreGeneration;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -62,17 +63,18 @@ public class CommonProxy {
 		XerxesPlus.logger.info("Loading configuration");
 		config = new Configuration(e.getSuggestedConfigurationFile());
 		config.load();
-		
 		maxXp = config.getInt("maxXp", "xpStore", Integer.MAX_VALUE, 1, Integer.MAX_VALUE, "How much experience the XP Storage block may hold (this is NOT in levels).");
-		
 		config.save();
-
+		
 		XerxesPlus.logger.info("Registering tile entities");
 		ModTiles.commonPreinit();
 		
+		XerxesPlus.logger.info("Initializing xp calculations");
+		XpCalculation.commonPreinit();
+		
 		XerxesPlus.logger.info("Registering GUI handler");
 		NetworkRegistry.INSTANCE.registerGuiHandler(XerxesPlus.instance, new GuiHandler());
-
+		
 		XerxesPlus.logger.info("Registering GUIs");
 		registerGuis();
 		

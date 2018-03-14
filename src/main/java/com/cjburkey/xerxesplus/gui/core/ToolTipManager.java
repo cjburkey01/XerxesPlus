@@ -5,10 +5,6 @@ import java.util.Iterator;
 import java.util.List;
 import net.minecraft.client.gui.FontRenderer;
 
-/*
- * CREATED BY CRAZYPANTS, NOT CJ BURKEY
- * CJ DOES NOT CLAIM TO HAVE CREATED THIS
- */
 public class ToolTipManager {
 	
 	public static interface ToolTipRenderer {

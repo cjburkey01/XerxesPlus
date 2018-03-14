@@ -66,7 +66,7 @@ public class PacketTakeXpToServer implements IMessage {
 			if (ent == null || !(ent instanceof TileEntityXpStore)) {
 				return null;
 			}
-			((TileEntityXpStore) ent).updateStorage(ctx.getServerHandler().player, msg.levels);
+			((TileEntityXpStore) ent).updateStorage(ctx.getServerHandler().player, msg.levels, (msg.levels == Integer.MAX_VALUE || msg.levels == Integer.MIN_VALUE));
 			return null;
 		}
 		

@@ -4,7 +4,6 @@ import java.awt.Rectangle;
 import java.text.DecimalFormat;
 import java.util.List;
 import com.cjburkey.xerxesplus.ModInfo;
-import com.cjburkey.xerxesplus.XerxesPlus;
 import com.cjburkey.xerxesplus.block.BlockXpStore;
 import com.cjburkey.xerxesplus.gui.core.GuiToolTip;
 import com.cjburkey.xerxesplus.gui.core.ToolTipManager;
@@ -13,6 +12,7 @@ import com.cjburkey.xerxesplus.packet.PacketHandler;
 import com.cjburkey.xerxesplus.packet.PacketTakeXpToServer;
 import com.cjburkey.xerxesplus.packet.PacketXpToServer;
 import com.cjburkey.xerxesplus.tile.TileEntityInventory;
+import com.cjburkey.xerxesplus.util.XpCalculation;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.resources.I18n;
@@ -120,27 +120,7 @@ public class GuiContainerXpStore extends GuiInventoryBase implements ToolTipRend
 	
 	public static void updateValues(int xpLevel, int xpStored, int maxXp) {
 		xpLevelString = getFormatted(xpLevel) + " / " + getFormatted(maxXp) + " " + I18n.format("xp_levels");
-		xpString = getFormatted(xpStored) + " / " + getFormatted(getSingleLevelToNext(xpLevel)) + " " + I18n.format("xp_singles");
-	}
-	
-	public static int levelToXp(int level) {
-		if (level >= 1 && level <= 16) {
-			return (int) (level * level + 6 * level);
-		} else if (level >= 17 && level <= 31) {
-			return (int) (2.5 * (level * level) - 40.5f * level + 360);
-		} else if (level >= 32) {
-			return (int) (4.5 * (level * level) - 162.5f * level + 2220);
-		} else {
-			return 0;
-		}
-	}
-	
-	public static int getLevelToLevel(int start, int end) {
-		return levelToXp(end) - levelToXp(start);
-	}
-	
-	public static int getSingleLevelToNext(int level) {
-		return levelToXp(level + 1) - levelToXp(level);
+		xpString = getFormatted(xpStored) + " / " + getFormatted(XpCalculation.getXpBarCapacity(xpLevel)) + " " + I18n.format("xp_singles");
 	}
 	
 	public static String getFormatted(int value) {
