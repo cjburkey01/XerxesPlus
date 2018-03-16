@@ -22,7 +22,6 @@ import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-@Mod.EventBusSubscriber
 public class GuiContainerXpStore extends GuiInventoryBase implements ToolTipRenderer {
 	
 	public static ResourceLocation TEXTURE = new ResourceLocation(ModInfo.MODID, "textures/gui/container/gui_xp_store.png");
@@ -58,7 +57,7 @@ public class GuiContainerXpStore extends GuiInventoryBase implements ToolTipRend
 		ttm.addToolTip(new GuiToolTip(new Rectangle(xSize - 30, 42, 20, 20), I18n.format("xp_take_all")));
 	}
 	
-	private void onButtonClicked(GuiButton btn) {
+	public void actionPerformed(GuiButton btn) {
 		switch (btn.id) {
 		case 0:
 			tryTakeLevels(1);
@@ -110,13 +109,6 @@ public class GuiContainerXpStore extends GuiInventoryBase implements ToolTipRend
 	}
 	
 	// -- STATIC EVENT LISTENER -- //
-	
-	@SubscribeEvent
-	public static void onButtonClick(GuiScreenEvent.ActionPerformedEvent.Pre e) {
-		if (e.getGui().equals(INSTANCE)) {
-			INSTANCE.onButtonClicked(e.getButton());
-		}
-	}
 	
 	public static void updateValues(int xpLevel, int xpStored, int maxXp) {
 		xpLevelString = getFormatted(xpLevel) + " / " + getFormatted(maxXp) + " " + I18n.format("xp_levels");

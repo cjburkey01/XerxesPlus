@@ -14,7 +14,6 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 version = "1.0.0"
 group = "com.cjburkey.xerxesplus" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "xerxesplus"
-mname = "Xerxes Plus"
 
 sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 compileJava {
@@ -63,14 +62,13 @@ processResources {
     inputs.property "version", project.version
     inputs.property "modid", project.archivesBaseName
     inputs.property "mcversion", project.minecraft.version
-    inputs.property "modname", project.mname
 
     // replace stuff in mcmod.info, nothing else
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
                 
         // replace version and mcversion
-        expand 'version':project.version, 'modid':project.archivesBaseName, 'mcversion':project.minecraft.version, 'modname':project.mname
+        expand 'version':project.version, 'modid':project.archivesBaseName, 'mcversion':project.minecraft.version
     }
         
     // copy everything else except the mcmod.info

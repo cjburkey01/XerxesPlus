@@ -1,16 +1,16 @@
 [
 {
   "modid": "${modid}",
-  "name": "${modname}",
+  "name": "Xerxes Plus",
   "description": "A mod that adds many power-based items and such.",
   "version": "${mcversion}_${version}",
   "mcversion": "${mcversion}",
   "url": "https://github.com/cjburkey01/XerxesPlus",
   "updateUrl": "",
-  "authorList": ["CJ Burkey"],
+  "authorList": [ "CJ Burkey" ],
   "credits": "The Forge and FML guys, for making Forge.",
   "logoFile": "logo.png",
   "screenshots": [],
-  "dependencies": []
+  "dependencies": [ "jaopca" ]
 }
 ]

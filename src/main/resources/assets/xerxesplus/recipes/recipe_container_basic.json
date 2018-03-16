@@ -12,7 +12,7 @@
         },
         "y": {
             "type": "forge:ore_dict",
-            "ore": "backplateIron"
+            "ore": "plateIron"
         },
         "z": {
             "type": "forge:ore_dict",

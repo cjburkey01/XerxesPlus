@@ -39,6 +39,7 @@ public class CommonProxy {
 	
 	public static Configuration config;
 	
+	public static String GB = "com.cjburkey.xerxesplus.gui.";
 	public static int guiBasicContainerId;
 	public static int guiAdvancedContainerId;
 	public static int guiExtremeContainerId;
@@ -47,10 +48,10 @@ public class CommonProxy {
 	public static int maxXp;
 	
 	private void registerGuis() {
-		guiBasicContainerId = GuiHandler.addGui(new GuiInventoryRegister(BlockContainerBasic.INV_DEF, GuiContainerBasic.class));
-		guiAdvancedContainerId = GuiHandler.addGui(new GuiInventoryRegister(BlockContainerAdvanced.INV_DEF, GuiContainerAdvanced.class));
-		guiExtremeContainerId = GuiHandler.addGui(new GuiInventoryRegister(BlockContainerExtreme.INV_DEF, GuiContainerExtreme.class));
-		guiXpStoreId = GuiHandler.addGui(new GuiInventoryRegister(BlockXpStore.INV_DEF, GuiContainerXpStore.class));
+		guiBasicContainerId = GuiHandler.addGui(new GuiInventoryRegister(BlockContainerBasic.INV_DEF, GB + "GuiContainerBasic"));
+		guiAdvancedContainerId = GuiHandler.addGui(new GuiInventoryRegister(BlockContainerAdvanced.INV_DEF, GB + "GuiContainerAdvanced"));
+		guiExtremeContainerId = GuiHandler.addGui(new GuiInventoryRegister(BlockContainerExtreme.INV_DEF, GB + "GuiContainerExtreme"));
+		guiXpStoreId = GuiHandler.addGui(new GuiInventoryRegister(BlockXpStore.INV_DEF, GB + "GuiContainerXpStore"));
 	}
 	
 	public void construction(FMLConstructionEvent e) {
@@ -104,11 +105,16 @@ public class CommonProxy {
 	public static class GuiInventoryRegister extends GuiRegister {
 		
 		private InventoryDefinition invDef;
-		private Class<? extends GuiInventoryBase> guiClass;
+		private Class<?> guiClass;
 		
-		public GuiInventoryRegister(InventoryDefinition invDef, Class<? extends GuiInventoryBase> guiClass) {
+		public GuiInventoryRegister(InventoryDefinition invDef, String guiClass) {
 			this.invDef = invDef;
-			this.guiClass = guiClass;
+			try {
+				this.guiClass = Class.forName(guiClass);
+			} catch (ClassNotFoundException e) {
+				XerxesPlus.logger.warn("GUI class not found. This is either a server or we're a broken version.");
+				this.guiClass = null;
+			}
 		}
 		
 		public Object onServer(EntityPlayer player, World world, int x, int y, int z) {
@@ -117,6 +123,9 @@ public class CommonProxy {
 		
 		public Object onClient(EntityPlayer player, World world, int x, int y, int z) {
 			try {
+				if (guiClass == null) {
+					return null;
+				}
 				return guiClass.getConstructor(IInventory.class, TileEntityInventory.class).newInstance(player.inventory, (TileEntityInventory) world.getTileEntity(new BlockPos(x, y, z)));
 			} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
 				XerxesPlus.logger.error("Failed to create inventory GUI on client: " + e.getMessage());

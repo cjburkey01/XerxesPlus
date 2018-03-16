@@ -14,9 +14,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 @Mod.EventBusSubscriber
 public class ModBlocks {
 	
-	public static Block blockDebug;
-	
-	public static Block blockMeticulum;
 	public static Block blockMeticulumOre;
 	public static Block blockContainerBasic;
 	public static Block blockContainerAdvanced;
@@ -24,9 +21,6 @@ public class ModBlocks {
 	public static Block blockXpStore;
 	
 	private static void createBlocks() {
-		blockDebug = createBlock(new Block(Material.GROUND), "block_debug").setCreativeTab(null);
-		
-		blockMeticulum = createBlock(new BlockMetal(), "block_meticulum");
 		blockMeticulumOre = createBlock(new BlockOre(2.5f), "block_meticulum_ore");
 		blockContainerBasic = createBlock(new BlockContainerBasic(), "block_container_basic");
 		blockContainerAdvanced = createBlock(new BlockContainerAdvanced(), "block_container_advanced");

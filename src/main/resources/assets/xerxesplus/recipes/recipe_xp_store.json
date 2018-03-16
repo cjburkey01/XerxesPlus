@@ -8,7 +8,7 @@
     "key": {
         "x": {
             "type": "forge:ore_dict",
-            "ore": "backplateMeticulum"
+            "ore": "plateMeticulum"
         },
         "y": {
             "type": "forge:ore_dict",

@@ -15,7 +15,7 @@ import net.minecraftforge.fml.common.event.FMLInterModComms.IMCMessage;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = ModInfo.MODID, name = ModInfo.NAME, version = ModInfo.VERSION, dependencies = "", useMetadata = false, clientSideOnly = false,
+@Mod(modid = ModInfo.MODID, name = ModInfo.NAME, version = ModInfo.VERSION, dependencies = "required:jaopca", useMetadata = false, clientSideOnly = false,
 	serverSideOnly = false, modLanguage = "java", modLanguageAdapter = "", canBeDeactivated = false, guiFactory = "", updateJSON = "",
 	customProperties = {  })
 public class XerxesPlus {

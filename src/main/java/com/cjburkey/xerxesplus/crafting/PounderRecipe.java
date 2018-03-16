@@ -14,8 +14,8 @@ import net.minecraftforge.fml.common.event.FMLInterModComms.IMCMessage;
 public class PounderRecipe {
 	
 	public static void commonInit() {
-		registerGlobalCrusherRecipe(200, new ItemStack(ModItems.meticulumIngot, 1), new ItemStack(ModItems.meticulumDust, 1), null, 1);
-		registerGlobalCrusherRecipe(300, new ItemStack(ModBlocks.blockMeticulumOre, 1), new ItemStack(ModItems.meticulumDust, 2), new ItemStack(Items.DIAMOND, 1), 1);
+		//registerGlobalCrusherRecipe(200, new ItemStack(ModItems.meticulumIngot, 1), new ItemStack(ModItems.meticulumDust, 1), null, 1);
+		//registerGlobalCrusherRecipe(300, new ItemStack(ModBlocks.blockMeticulumOre, 1), new ItemStack(ModItems.meticulumDust, 2), new ItemStack(Items.DIAMOND, 1), 1);
 	}
 	
 	// -- PER-RECIPE VALUES -- //

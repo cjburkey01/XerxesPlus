@@ -22,8 +22,8 @@ public class XerxesPlusOreGeneration implements IWorldGenerator {
 	private List<WorldGenDefinition> generators = new ArrayList<>();
 	
 	public XerxesPlusOreGeneration() {
-		// Y-level 5 to 16 in dimension 0(overworld)
-		generators.add(new WorldGenDefinition(5, 16, 2, new int[] { 0 }, ModBlocks.blockMeticulumOre, new int[] { 1, 2, 3 }));
+		// Y-level 5 to 16 in all dimensions but the end(1) and the nether(-1)
+		generators.add(new WorldGenDefinition(5, 16, 4, false, new int[] { -1, 1 }, ModBlocks.blockMeticulumOre, new int[] { 1, 2 }));
 	}
 	
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
@@ -34,19 +34,44 @@ public class XerxesPlusOreGeneration implements IWorldGenerator {
 	
 	private class WorldGenDefinition {
 		
-		private int minY;
-		private int maxY;
-		private int tries;
-		private int[] dimensions;
-		private WorldGenMinable[] generators;
+		private final int minY;
+		private final int maxY;
+		private final int tries;
+		private final boolean whitelist;
+		private final int[] dimensions;
+		private final WorldGenMinable[] generators;
 		
+		/**
+		 * Defines a world generator
+		 * @param minY			The minimum y-level for the ore to generate
+		 * @param maxY			The maximum y-level for the ore to generate
+		 * @param tries			The number of attempts to generate per chunk
+		 * @param dimensions	The list of dimensions in which this ore may generate
+		 * @param block			The ore block to generate
+		 * @param sizes			A list of possible vein sizes
+		 */
 		public WorldGenDefinition(int minY, int maxY, int tries, int[] dimensions, Block block, int[] sizes) {
+			this(minY, maxY, tries, true, dimensions, block, sizes);
+		}
+		
+		/**
+		 * Defines a world generator
+		 * @param minY			The minimum y-level for the ore to generate
+		 * @param maxY			The maximum y-level for the ore to generate
+		 * @param tries			The number of attempts to generate per chunk
+		 * @param whitelist		Whether or not the dimension list will be inclusive (true) or exclusive (false)
+		 * @param dimensions	A whitelisted or blacklisted list of dimensions
+		 * @param block			The ore block to generate
+		 * @param sizes			A list of possible vein sizes
+		 */
+		public WorldGenDefinition(int minY, int maxY, int tries, boolean whitelist, int[] dimensions, Block block, int[] sizes) {
 			if (minY > maxY || minY < 0 || maxY > 255) {
 				throw new IllegalArgumentException("Ore generated out of bounds: min - max = " + minY + " - " + maxY);
 			}
 			this.minY = minY;
 			this.maxY = maxY;
 			this.tries = tries;
+			this.whitelist = whitelist;
 			this.dimensions = dimensions;
 			generators = new WorldGenMinable[sizes.length];
 			for (int i = 0; i < sizes.length; i ++) {
@@ -54,10 +79,17 @@ public class XerxesPlusOreGeneration implements IWorldGenerator {
 			}
 		}
 		
+		/**
+		 * Attempts to generate this ore in a given chunk
+		 * @param world		The world in which to generate the ore
+		 * @param random	A random value to use to generate the ore patches
+		 * @param chunkX	The x-position of the chunk in which to generate the ore patches
+		 * @param chunkZ	The y-position of the chunk in which to generate the ore patches
+		 */
 		public void generate(World world, Random random, int chunkX, int chunkZ) {
 			boolean inDim = false;
 			for (int dim : dimensions) {
-				if (world.provider.getDimension() == dim) {
+				if ((whitelist && world.provider.getDimension() == dim) || (!whitelist && world.provider.getDimension() != dim)) {
 					inDim = true;
 					break;
 				}
