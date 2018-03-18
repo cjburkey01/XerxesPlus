@@ -3,7 +3,7 @@ package com.cjburkey.xerxesplus.util;
 import javax.annotation.Nonnull;
 import net.minecraft.entity.player.EntityPlayer;
 
-public class XpCalculation {
+public class XpCalcHelper {
 	
 	private static final int[] xpmap = new int[21863];
 	public static final int EXP_PER_MB = 20;

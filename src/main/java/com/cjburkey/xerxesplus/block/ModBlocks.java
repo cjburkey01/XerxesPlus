@@ -6,7 +6,6 @@ import com.cjburkey.xerxesplus.ModInfo;
 import com.cjburkey.xerxesplus.XerxesPlus;
 import com.cjburkey.xerxesplus.item.ModItems;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -19,6 +18,7 @@ public class ModBlocks {
 	public static Block blockContainerAdvanced;
 	public static Block blockContainerExtreme;
 	public static Block blockXpStore;
+	public static Block blockQuarry;
 	
 	private static void createBlocks() {
 		blockMeticulumOre = createBlock(new BlockOre(2.5f), "block_meticulum_ore");
@@ -26,6 +26,7 @@ public class ModBlocks {
 		blockContainerAdvanced = createBlock(new BlockContainerAdvanced(), "block_container_advanced");
 		blockContainerExtreme = createBlock(new BlockContainerExtreme(), "block_container_extreme");
 		blockXpStore = createBlock(new BlockXpStore(), "block_xp_store");
+		blockQuarry = createBlock(new BlockQuarry(), "block_quarry");
 	}
 	
 	// -- STATIC BLOCK REGISTRATION -- //

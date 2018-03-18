@@ -1,7 +1,6 @@
 package com.cjburkey.xerxesplus.gui;
 
 import java.awt.Rectangle;
-import java.text.DecimalFormat;
 import java.util.List;
 import com.cjburkey.xerxesplus.ModInfo;
 import com.cjburkey.xerxesplus.block.BlockXpStore;
@@ -12,21 +11,18 @@ import com.cjburkey.xerxesplus.packet.PacketHandler;
 import com.cjburkey.xerxesplus.packet.PacketTakeXpToServer;
 import com.cjburkey.xerxesplus.packet.PacketXpToServer;
 import com.cjburkey.xerxesplus.tile.TileEntityInventory;
-import com.cjburkey.xerxesplus.util.XpCalculation;
+import com.cjburkey.xerxesplus.util.TextHelper;
+import com.cjburkey.xerxesplus.util.XpCalcHelper;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.event.GuiScreenEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class GuiContainerXpStore extends GuiInventoryBase implements ToolTipRenderer {
 	
 	public static ResourceLocation TEXTURE = new ResourceLocation(ModInfo.MODID, "textures/gui/container/gui_xp_store.png");
 	private static GuiContainerXpStore INSTANCE;
-	private static DecimalFormat formatter;
 	private static String xpString;
 	private static String xpLevelString;
 	
@@ -111,16 +107,8 @@ public class GuiContainerXpStore extends GuiInventoryBase implements ToolTipRend
 	// -- STATIC EVENT LISTENER -- //
 	
 	public static void updateValues(int xpLevel, int xpStored, int maxXp) {
-		xpLevelString = getFormatted(xpLevel) + " / " + getFormatted(maxXp) + " " + I18n.format("xp_levels");
-		xpString = getFormatted(xpStored) + " / " + getFormatted(XpCalculation.getXpBarCapacity(xpLevel)) + " " + I18n.format("xp_singles");
-	}
-	
-	public static String getFormatted(int value) {
-		if (formatter == null) {
-			formatter = new DecimalFormat("###,###");
-		}
-		String output = formatter.format(value);
-		return output;
+		xpLevelString = TextHelper.getFormatted(xpLevel) + " / " + TextHelper.getFormatted(maxXp) + " " + I18n.format("xp_levels");
+		xpString = TextHelper.getFormatted(xpStored) + " / " + TextHelper.getFormatted(XpCalcHelper.getXpBarCapacity(xpLevel)) + " " + I18n.format("xp_singles");
 	}
 	
 }

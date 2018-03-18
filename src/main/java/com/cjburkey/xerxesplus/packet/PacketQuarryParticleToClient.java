@@ -3,39 +3,35 @@ package com.cjburkey.xerxesplus.packet;
 import java.util.regex.Pattern;
 import com.cjburkey.xerxesplus.XerxesPlus;
 import com.cjburkey.xerxesplus.config.ModConfig;
-import com.cjburkey.xerxesplus.tile.TileEntityXpStore;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.client.Minecraft;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class PacketXpToServer implements IMessage {
+public class PacketQuarryParticleToClient implements IMessage {
 	
 	private int x;
 	private int y;
 	private int z;
 	
-	public PacketXpToServer() {
+	public PacketQuarryParticleToClient() {
 	}
 	
-	public PacketXpToServer(int x, int y, int z) {
+	public PacketQuarryParticleToClient(int x, int y, int z) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
-	}
-	
-	public PacketXpToServer(BlockPos pos) {
-		this(pos.getX(), pos.getY(), pos.getZ());
 	}
 	
 	public void fromBytes(ByteBuf buf) {
 		String found = ByteBufUtils.readUTF8String(buf);
 		String[] split = found.split(Pattern.quote(PacketHandler.PACKET_VARIABLE_SEPARATOR));
 		if (split.length != 3) {
-			XerxesPlus.logger.warn("Failed to decode packet: Could not split XP Store packet on server into blockpos");
+			XerxesPlus.logger.warn("Failed to decode packet: Could not split quarry packet on client into data");
 			return;
 		}
 		try {
@@ -52,18 +48,14 @@ public class PacketXpToServer implements IMessage {
 		ByteBufUtils.writeUTF8String(buf, x + PacketHandler.PACKET_VARIABLE_SEPARATOR + y + PacketHandler.PACKET_VARIABLE_SEPARATOR + z);
 	}
 	
-	public static class Handler implements IMessageHandler<PacketXpToServer, PacketXpToClient> {
+	public static class Handler implements IMessageHandler<PacketQuarryParticleToClient, IMessage> {
 		
-		public PacketXpToClient onMessage(PacketXpToServer msg, MessageContext ctx) {
-			if (msg == null) {
+		public IMessage onMessage(PacketQuarryParticleToClient msg, MessageContext ctx) {
+			if (msg == null || !ModConfig.drawQuarryParticles) {
 				return null;
 			}
-			BlockPos pos = new BlockPos(msg.x, msg.y, msg.z);
-			TileEntity ent = ctx.getServerHandler().player.world.getTileEntity(pos);
-			if (ent != null && ent instanceof TileEntityXpStore) {
-				TileEntityXpStore xpStore = (TileEntityXpStore) ent;
-				return new PacketXpToClient(xpStore.experienceLevel, (int) Math.floor(xpStore.experience * xpStore.getXpBarCapacity()), ModConfig.maxXp);
-			}
+			World world = Minecraft.getMinecraft().player.world;
+			world.spawnParticle(EnumParticleTypes.FLAME, msg.x + 0.5d, msg.y + 0.5d, msg.z + 0.5d, 0.0d, 0.0d, 0.0d);
 			return null;
 		}
 		

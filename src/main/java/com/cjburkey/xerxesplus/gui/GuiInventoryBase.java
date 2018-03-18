@@ -26,6 +26,12 @@ public class GuiInventoryBase extends GuiContainer {
 		ySize = invDef.getHeight();
 	}
 	
+	public void drawScreen(int mx, int my, float partials) {
+		this.drawDefaultBackground();
+		super.drawScreen(mx, my, partials);
+		this.renderHoveredToolTip(mx, my);
+	}
+	
 	protected void drawGuiContainerBackgroundLayer(float partial, int mx, int my) {
 		GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
 		mc.getTextureManager().bindTexture(texture);

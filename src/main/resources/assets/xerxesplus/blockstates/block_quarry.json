@@ -1,0 +1,19 @@
+{
+    "variants": {
+        "facing=north": {
+            "model": "xerxesplus:block_quarry"
+        },
+        "facing=south": {
+            "model": "xerxesplus:block_quarry",
+            "y": 180
+        },
+        "facing=west":  {
+            "model": "xerxesplus:block_quarry",
+            "y": 270
+        },
+        "facing=east":  {
+            "model": "xerxesplus:block_quarry",
+            "y": 90
+        }
+    }
+}

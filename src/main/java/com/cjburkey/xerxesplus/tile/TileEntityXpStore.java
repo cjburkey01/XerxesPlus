@@ -1,7 +1,7 @@
 package com.cjburkey.xerxesplus.tile;
 
-import com.cjburkey.xerxesplus.proxy.CommonProxy;
-import com.cjburkey.xerxesplus.util.XpCalculation;
+import com.cjburkey.xerxesplus.config.ModConfig;
+import com.cjburkey.xerxesplus.util.XpCalcHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -30,18 +30,18 @@ public class TileEntityXpStore extends TileEntityInventory {
 	}
 	
 	public int addExperience(int xpToAdd) {
-		int j = CommonProxy.maxXp - experienceTotal;
+		int j = ModConfig.maxXp - experienceTotal;
 		if (xpToAdd > j) {
 			xpToAdd = j;
 		}
 		experienceTotal += xpToAdd;
-		experienceLevel = XpCalculation.getLevelForExperience(experienceTotal);
-		experience = (experienceTotal - XpCalculation.getExperienceForLevel(experienceLevel)) / (float) getXpBarCapacity();
+		experienceLevel = XpCalcHelper.getLevelForExperience(experienceTotal);
+		experience = (experienceTotal - XpCalcHelper.getExperienceForLevel(experienceLevel)) / (float) getXpBarCapacity();
 		return xpToAdd;
 	}
 	
 	public int getXpBarCapacity() {
-		return XpCalculation.getXpBarCapacity(experienceLevel);
+		return XpCalcHelper.getXpBarCapacity(experienceLevel);
 	}
 	
 	public int getXpBarScaled(int scale) {
@@ -56,12 +56,12 @@ public class TileEntityXpStore extends TileEntityInventory {
 	}
 	
 	public void givePlayerXpLevel(EntityPlayer player) {
-		int currentXP = XpCalculation.getPlayerXP(player);
-		int nextLevelXP = XpCalculation.getExperienceForLevel(player.experienceLevel + 1);
+		int currentXP = XpCalcHelper.getPlayerXP(player);
+		int nextLevelXP = XpCalcHelper.getExperienceForLevel(player.experienceLevel + 1);
 		int requiredXP = nextLevelXP - currentXP;
 
 		requiredXP = Math.min(experienceTotal, requiredXP);
-		XpCalculation.addPlayerXP(player, requiredXP);
+		XpCalcHelper.addPlayerXP(player, requiredXP);
 
 		int newXp = experienceTotal - requiredXP;
 		experience = 0;
@@ -71,25 +71,25 @@ public class TileEntityXpStore extends TileEntityInventory {
 	}
 	
 	public void drainPlayerXpToReachContainerLevel(EntityPlayer player, int level) {
-		int targetXP = XpCalculation.getExperienceForLevel(level);
+		int targetXP = XpCalcHelper.getExperienceForLevel(level);
 		int requiredXP = targetXP - experienceTotal;
 		if (requiredXP <= 0) {
 			return;
 		}
-		int drainXP = Math.min(requiredXP, XpCalculation.getPlayerXP(player));
+		int drainXP = Math.min(requiredXP, XpCalcHelper.getPlayerXP(player));
 		addExperience(drainXP);
-		XpCalculation.addPlayerXP(player, -drainXP);
+		XpCalcHelper.addPlayerXP(player, -drainXP);
 	}
 	
 	public void drainPlayerXpToReachPlayerLevel(EntityPlayer player, int level) {
-		int targetXP = XpCalculation.getExperienceForLevel(level);
-		int drainXP = XpCalculation.getPlayerXP(player) - targetXP;
+		int targetXP = XpCalcHelper.getExperienceForLevel(level);
+		int drainXP = XpCalcHelper.getPlayerXP(player) - targetXP;
 		if (drainXP <= 0) {
 			return;
 		}
 		drainXP = addExperience(drainXP);
 		if (drainXP > 0) {
-			XpCalculation.addPlayerXP(player, -drainXP);
+			XpCalcHelper.addPlayerXP(player, -drainXP);
 		}
 	}
 	

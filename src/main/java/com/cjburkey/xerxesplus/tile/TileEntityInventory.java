@@ -1,18 +1,25 @@
 package com.cjburkey.xerxesplus.tile;
 
+import com.cjburkey.xerxesplus.util.ItemHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.wrapper.InvWrapper;
 
 public abstract class TileEntityInventory extends TileEntity implements IInventory {
 	
+	private IItemHandler itemHandler;
 	private String name;
 	private String customName = null;
 	private int size;
@@ -135,12 +142,7 @@ public abstract class TileEntityInventory extends TileEntity implements IInvento
 		if (hasCustomName()) {
 			nbt.setString("custom_name", customName);
 		}
-		NBTTagList items = new NBTTagList();
-		for (ItemStack stack : stacks) {
-			items.appendTag(stack.serializeNBT());
-		}
-		nbt.setTag("items", items);
-		return super.writeToNBT(nbt);
+		return super.writeToNBT(ItemHelper.addItemsToTag("items", nbt, stacks));
 	}
 	
 	public void readFromNBT(NBTTagCompound nbt) {
@@ -153,13 +155,32 @@ public abstract class TileEntityInventory extends TileEntity implements IInvento
 		} else {
 			customName = null;
 		}
-		NBTTagList items = nbt.getTagList("items", new NBTTagCompound().getId());
-		if (items.tagCount() != size) {
-			return;
+		int i = 0;
+		for (ItemStack stack : ItemHelper.getItemsFromTag("items", nbt, size)) {
+			setInventorySlotContents(i ++, stack);
 		}
-		for (int i = 0; i < items.tagCount(); i ++) {
-			setInventorySlotContents(i, new ItemStack(items.getCompoundTagAt(i)));
+	}
+	
+	protected IItemHandler createUnSidedHandler() {
+		return new InvWrapper(this);
+	}
+	
+	protected IItemHandler getUnSidedHandler() {
+		if (itemHandler == null) {
+			return (itemHandler = createUnSidedHandler());
 		}
+		return itemHandler;
+	}
+	
+	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
+		if (capability.equals(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)) {
+			return (T) getUnSidedHandler();
+		}
+		return super.getCapability(capability, facing);
+	}
+	
+	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
+		return capability.equals(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) || super.hasCapability(capability, facing);
 	}
 	
 }
