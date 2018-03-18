@@ -7,10 +7,10 @@ import com.cjburkey.xerxesplus.XerxesPlus;
 import com.cjburkey.xerxesplus.item.ModItems;
 import net.minecraft.block.Block;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-@Mod.EventBusSubscriber
+@EventBusSubscriber(modid = ModInfo.MODID)
 public class ModBlocks {
 	
 	public static Block blockMeticulumOre;

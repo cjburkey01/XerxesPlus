@@ -147,7 +147,7 @@ public abstract class TileEntityInventory extends TileEntity implements IInvento
 	
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
-		if (nbt == null || !nbt.hasKey("items")) {
+		if (nbt == null) {
 			return;
 		}
 		if (nbt.hasKey("custom_name")) {
@@ -155,9 +155,11 @@ public abstract class TileEntityInventory extends TileEntity implements IInvento
 		} else {
 			customName = null;
 		}
-		int i = 0;
-		for (ItemStack stack : ItemHelper.getItemsFromTag("items", nbt, size)) {
-			setInventorySlotContents(i ++, stack);
+		if (nbt.hasKey("items")) {
+			int i = 0;
+			for (ItemStack stack : ItemHelper.getItemsFromTag("items", nbt, size)) {
+				setInventorySlotContents(i ++, stack);
+			}
 		}
 	}
 	

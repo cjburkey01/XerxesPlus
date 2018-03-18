@@ -62,7 +62,7 @@ public class PacketXpToServer implements IMessage {
 			TileEntity ent = ctx.getServerHandler().player.world.getTileEntity(pos);
 			if (ent != null && ent instanceof TileEntityXpStore) {
 				TileEntityXpStore xpStore = (TileEntityXpStore) ent;
-				return new PacketXpToClient(xpStore.experienceLevel, (int) Math.floor(xpStore.experience * xpStore.getXpBarCapacity()), ModConfig.maxXp);
+				return new PacketXpToClient(xpStore.experienceLevel, (int) Math.floor(xpStore.experience * xpStore.getXpBarCapacity()), ModConfig.experienceStore.maxXp);
 			}
 			return null;
 		}

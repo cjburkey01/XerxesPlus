@@ -30,7 +30,7 @@ public class TileEntityXpStore extends TileEntityInventory {
 	}
 	
 	public int addExperience(int xpToAdd) {
-		int j = ModConfig.maxXp - experienceTotal;
+		int j = ModConfig.experienceStore.maxXp - experienceTotal;
 		if (xpToAdd > j) {
 			xpToAdd = j;
 		}

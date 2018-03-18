@@ -1,6 +1,6 @@
 [
 {
-  "modid": "${modid}",
+  "modid": "xerxesplus",
   "name": "Xerxes Plus",
   "description": "A mod that adds many power-based items and such.",
   "version": "${mcversion}_${version}",

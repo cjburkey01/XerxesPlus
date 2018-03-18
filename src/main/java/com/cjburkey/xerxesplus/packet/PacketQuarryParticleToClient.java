@@ -51,7 +51,7 @@ public class PacketQuarryParticleToClient implements IMessage {
 	public static class Handler implements IMessageHandler<PacketQuarryParticleToClient, IMessage> {
 		
 		public IMessage onMessage(PacketQuarryParticleToClient msg, MessageContext ctx) {
-			if (msg == null || !ModConfig.drawQuarryParticles) {
+			if (msg == null || !ModConfig.quarry.drawQuarryParticles) {
 				return null;
 			}
 			World world = Minecraft.getMinecraft().player.world;

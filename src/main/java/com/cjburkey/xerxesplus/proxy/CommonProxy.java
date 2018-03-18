@@ -58,12 +58,6 @@ public class CommonProxy {
 	public void preinit(FMLPreInitializationEvent e) {
 		XerxesPlus.logger.info("Preinitializing Xerxes Plus");
 		
-		XerxesPlus.logger.info("Loading configuration");
-		config = new Configuration(e.getSuggestedConfigurationFile());
-		config.load();
-		ModConfig.commonPreinit(config);
-		config.save();
-		
 		XerxesPlus.logger.info("Registering tile entities");
 		ModTiles.commonPreinit();
 		

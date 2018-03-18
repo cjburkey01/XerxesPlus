@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
@@ -19,7 +20,7 @@ public class PacketHandler {
 	private static byte i = 0;
 	
 	public static void commonPreinit() {
-		network = new SimpleNetworkWrapper(ModInfo.MODID);
+		network = NetworkRegistry.INSTANCE.newSimpleChannel(ModInfo.MODID);
 		
 		network.registerMessage(PacketXpToClient.Handler.class, PacketXpToClient.class, i ++, Side.CLIENT);
 		network.registerMessage(PacketXpToServer.Handler.class, PacketXpToServer.class, i ++, Side.SERVER);

@@ -32,7 +32,7 @@ public class GuiContainerQuarry extends GuiInventoryBase {
 	}
 	
 	public static void updateValues(int x, int y, int z, int energy, int maxEnergy, boolean energyLow) {
-		energyString = TextHelper.getFormatted(energy) + ' ' + ModConfig.energyUnits + " / " + TextHelper.getFormatted(maxEnergy) + ' ' + ModConfig.energyUnits;
+		energyString = TextHelper.getFormatted(energy) + ' ' + ModConfig.misc.energyUnits + " / " + TextHelper.getFormatted(maxEnergy) + ' ' + ModConfig.misc.energyUnits;
 		posString = x + ", " + y + ", " + z;
 		GuiContainerQuarry.energyLow = energyLow;
 	}
