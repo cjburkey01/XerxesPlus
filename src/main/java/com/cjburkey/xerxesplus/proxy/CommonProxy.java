@@ -5,20 +5,22 @@ import com.cjburkey.xerxesplus.XerxesPlus;
 import com.cjburkey.xerxesplus.block.BlockContainerAdvanced;
 import com.cjburkey.xerxesplus.block.BlockContainerBasic;
 import com.cjburkey.xerxesplus.block.BlockContainerExtreme;
-import com.cjburkey.xerxesplus.block.BlockQuarry;
 import com.cjburkey.xerxesplus.block.BlockXpStore;
 import com.cjburkey.xerxesplus.container.ContainerInventory;
 import com.cjburkey.xerxesplus.container.ContainerInventory.InventoryDefinition;
 import com.cjburkey.xerxesplus.container.ContainerQuarry;
+import com.cjburkey.xerxesplus.container.ContainerTrash;
 import com.cjburkey.xerxesplus.crafting.FurnaceRecipe;
 import com.cjburkey.xerxesplus.crafting.PounderRecipe;
 import com.cjburkey.xerxesplus.gui.GuiContainerQuarry;
+import com.cjburkey.xerxesplus.gui.GuiContainerTrash;
 import com.cjburkey.xerxesplus.gui.GuiHandler;
 import com.cjburkey.xerxesplus.gui.GuiHandler.GuiRegister;
 import com.cjburkey.xerxesplus.item.ModItems;
 import com.cjburkey.xerxesplus.packet.PacketHandler;
 import com.cjburkey.xerxesplus.tile.ModTiles;
 import com.cjburkey.xerxesplus.tile.TileEntityInventory;
+import com.cjburkey.xerxesplus.tile.TileEntityTrash;
 import com.cjburkey.xerxesplus.util.XpCalcHelper;
 import com.cjburkey.xerxesplus.world.XerxesPlusOreGeneration;
 import net.minecraft.entity.player.EntityPlayer;
@@ -43,6 +45,7 @@ public class CommonProxy {
 	public static int guiExtremeContainerId;
 	public static int guiXpStoreId;
 	public static int guiQuarryId;
+	public static int guiTrashId;
 	
 	private void registerGuis() {
 		guiBasicContainerId = GuiHandler.addGui(new GuiInventoryRegister(BlockContainerBasic.INV_DEF, GB + "GuiContainerBasic"));
@@ -55,6 +58,14 @@ public class CommonProxy {
 			}
 			public Object onClient(EntityPlayer player, World world, int x, int y, int z) {
 				return new GuiContainerQuarry(player.inventory, (TileEntityInventory) world.getTileEntity(new BlockPos(x, y, z)));
+			}
+		});
+		guiTrashId = GuiHandler.addGui(new GuiRegister() {
+			public Object onServer(EntityPlayer player, World world, int x, int y, int z) {
+				return new ContainerTrash(player.inventory, (IInventory) world.getTileEntity(new BlockPos(x, y, z)));
+			}
+			public Object onClient(EntityPlayer player, World world, int x, int y, int z) {
+				return new GuiContainerTrash(player.inventory, (TileEntityTrash) world.getTileEntity(new BlockPos(x, y, z)));
 			}
 		});
 	}

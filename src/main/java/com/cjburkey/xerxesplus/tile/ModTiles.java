@@ -10,6 +10,7 @@ public class ModTiles {
 		GameRegistry.registerTileEntity(TileEntityContainerExtreme.class, "tile_container_extreme");
 		GameRegistry.registerTileEntity(TileEntityXpStore.class, "tile_xp_store");
 		GameRegistry.registerTileEntity(TileEntityQuarry.class, "tile_quarry");
+		GameRegistry.registerTileEntity(TileEntityTrash.class, "tile_trash");
 	}
 	
 }

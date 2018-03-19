@@ -32,7 +32,7 @@ public class ModItems {
 	private static void createItems() {
 		meticulumIngot = createItem(new Item(), "ingot_meticulum");
 		
-		itemUpgradeOpsPerSecond = createItem(new ItemUpgrade(0, 128), "upgrade_0");
+		itemUpgradeOpsPerSecond = createItem(new ItemUpgrade(0, 64), "upgrade_0");
 		itemUpgradeFortune = createItem(new ItemUpgrade(1, 3), "upgrade_1");
 		itemUpgradeSilkTouch = createItem(new ItemUpgrade(2, 64), "upgrade_2");
 	}

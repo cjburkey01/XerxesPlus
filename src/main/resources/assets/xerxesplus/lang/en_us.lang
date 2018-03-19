@@ -6,12 +6,14 @@ tile.block_container_advanced.name=Advanced Container
 tile.block_container_extreme.name=Extreme Container
 tile.block_xp_store.name=Experience Storage
 tile.block_quarry.name=Infinite Quarry
+tile.block_trash.name=Trashcan
 
 tile_container_basic=Basic Container
 tile_container_advanced=Advanced Container
 tile_container_extreme=Extreme Container
 tile_xp_store=Experience Storage
 tile_quarry=Infinite Quarry
+tile_trash=Trashcan
 
 xp_add_one=Add One Level
 xp_add_five=Add Five Levels

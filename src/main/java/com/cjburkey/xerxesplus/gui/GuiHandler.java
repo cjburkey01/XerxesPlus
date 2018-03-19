@@ -38,6 +38,8 @@ public class GuiHandler implements IGuiHandler {
 	public static abstract class GuiRegister {
 		
 		public abstract Object onServer(EntityPlayer player, World world, int x, int y, int z);
+		
+		@SideOnly(Side.CLIENT)
 		public abstract Object onClient(EntityPlayer player, World world, int x, int y, int z);
 		
 	}

@@ -19,6 +19,7 @@ public class ModBlocks {
 	public static Block blockContainerExtreme;
 	public static Block blockXpStore;
 	public static Block blockQuarry;
+	public static Block blockTrash;
 	
 	private static void createBlocks() {
 		blockMeticulumOre = createBlock(new BlockOre(2.5f), "block_meticulum_ore");
@@ -27,6 +28,7 @@ public class ModBlocks {
 		blockContainerExtreme = createBlock(new BlockContainerExtreme(), "block_container_extreme");
 		blockXpStore = createBlock(new BlockXpStore(), "block_xp_store");
 		blockQuarry = createBlock(new BlockQuarry(), "block_quarry");
+		blockTrash = createBlock(new BlockTrash(), "block_trash");
 	}
 	
 	// -- STATIC BLOCK REGISTRATION -- //
