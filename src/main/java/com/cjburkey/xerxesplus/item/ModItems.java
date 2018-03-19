@@ -25,8 +25,16 @@ public class ModItems {
 	
 	public static Item meticulumIngot;
 	
+	public static Item itemUpgradeOpsPerSecond;
+	public static Item itemUpgradeFortune;
+	public static Item itemUpgradeSilkTouch;
+	
 	private static void createItems() {
 		meticulumIngot = createItem(new Item(), "ingot_meticulum");
+		
+		itemUpgradeOpsPerSecond = createItem(new ItemUpgrade(0, 128), "upgrade_0");
+		itemUpgradeFortune = createItem(new ItemUpgrade(1, 3), "upgrade_1");
+		itemUpgradeSilkTouch = createItem(new ItemUpgrade(2, 64), "upgrade_2");
 	}
 	
 	private static void createOreDictionary() {

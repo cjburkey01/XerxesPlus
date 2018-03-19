@@ -26,7 +26,7 @@ import net.minecraft.world.World;
 
 public class BlockQuarry extends Block implements ITileEntityProvider {
 	
-	public static InventoryDefinition INV_DEF = new InventoryDefinition(176, 166, 0, 0, 8, 18, 58, 8, 84);
+	public static InventoryDefinition INV_DEF = new InventoryDefinition(176, 166, 3, 0, 8, 48, 58, 8, 84);
 	public static final PropertyDirection FACING = BlockHorizontal.FACING;
 
 	public BlockQuarry() {

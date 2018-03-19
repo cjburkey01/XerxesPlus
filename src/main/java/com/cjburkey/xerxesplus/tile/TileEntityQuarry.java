@@ -4,32 +4,29 @@ import java.util.ArrayList;
 import java.util.List;
 import com.cjburkey.xerxesplus.block.BlockQuarry;
 import com.cjburkey.xerxesplus.config.ModConfig;
+import com.cjburkey.xerxesplus.item.ItemUpgrade;
 import com.cjburkey.xerxesplus.packet.PacketHandler;
 import com.cjburkey.xerxesplus.packet.PacketQuarryParticleToClient;
 import com.cjburkey.xerxesplus.util.ItemHelper;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
-import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 
 public class TileEntityQuarry extends TileEntityInventory implements IEnergyStorage, ITickable {
 
-	public static final int opsPerTick = 5;
 	public static final int maxSkipsPerTick = 100;
-	public static final int width = 3;
-	
-	public TileEntityQuarry() {
-		super("tile_quarry", 0);
-	}
+	public static final int nearbyEntitySearchRadius = 1;
 	
 	private boolean init;
 	private boolean everyInit;
@@ -44,13 +41,19 @@ public class TileEntityQuarry extends TileEntityInventory implements IEnergyStor
 	private int skips = 0;
 	private List<ItemStack> workingOn = new ArrayList<>();
 	private boolean energyLow;
+	private int prevRed;
+	
+	public TileEntityQuarry() {
+		super("tile_quarry", 3);
+	}
 	
 	public void update() {
 		if (world.isRemote) {
 			return;
 		}
-		if (!everyInit) {
+		if (!everyInit || getRadius() != prevRed) {
 			everyInit = true;
+			prevRed = getRadius();
 			everyInit();
 		}
 		if (!init) {
@@ -58,7 +61,7 @@ public class TileEntityQuarry extends TileEntityInventory implements IEnergyStor
 			init();
 		}
 		boolean dirty = false;
-		for (int i = 0; i < opsPerTick; i ++) {
+		for (int i = 0; i < getOperationsPerTick(); i ++) {
 			if (!(dirty = attemptOperation())) {
 				return;
 			}
@@ -78,15 +81,14 @@ public class TileEntityQuarry extends TileEntityInventory implements IEnergyStor
 			posX = getPos().getX() + dir.getX();
 		}
 		posY = setNextY();
-		//nextForward();
 	}
 	
 	private void everyInit() {
 		Vec3i dir = getFacing().getDirectionVec();
-		minBoundX = (int) Math.ceil(pos.getX() - (width / 2.0f));
-		maxBoundX = (int) Math.ceil(pos.getX() + (width / 2.0f));
-		minBoundZ = (int) Math.ceil(pos.getZ() - (width / 2.0f));
-		maxBoundZ = (int) Math.ceil(pos.getZ() + (width / 2.0f));
+		minBoundX = (int) Math.ceil(pos.getX() - (getRadius() / 2.0f));
+		maxBoundX = (int) Math.ceil(pos.getX() + (getRadius() / 2.0f));
+		minBoundZ = (int) Math.ceil(pos.getZ() - (getRadius() / 2.0f));
+		maxBoundZ = (int) Math.ceil(pos.getZ() + (getRadius() / 2.0f));
 	}
 	
 	private boolean attemptOperation() {
@@ -116,6 +118,7 @@ public class TileEntityQuarry extends TileEntityInventory implements IEnergyStor
 		energy -= energyUse;
 		
 		List<ItemStack> drops = ItemHelper.getDropsForBlock(world, pos, 0);
+		addNearbyDrops(drops);
 		workingOn.addAll(drops);
 		world.setBlockState(pos, Blocks.AIR.getDefaultState());
 		if (ModConfig.quarry.drawQuarryParticles) {
@@ -124,6 +127,17 @@ public class TileEntityQuarry extends TileEntityInventory implements IEnergyStor
 		
 		nextBlock();
 		return true;
+	}
+	
+	private void addNearbyDrops(List<ItemStack> items) {
+		AxisAlignedBB aabb = new AxisAlignedBB(posX - nearbyEntitySearchRadius, posY - nearbyEntitySearchRadius, posZ - nearbyEntitySearchRadius, posX + nearbyEntitySearchRadius, posY + nearbyEntitySearchRadius, posZ + nearbyEntitySearchRadius);
+		for (EntityItem item : world.getEntitiesWithinAABB(EntityItem.class, aabb)) {
+			items.add(item.getItem());
+			world.removeEntity(item);
+		}
+		for (EntityXPOrb orb : world.getEntitiesWithinAABB(EntityXPOrb.class, aabb)) {
+			world.removeEntity(orb);
+		}
 	}
 	
 	private boolean addItems() {
@@ -274,6 +288,22 @@ public class TileEntityQuarry extends TileEntityInventory implements IEnergyStor
 			return (T) this;
 		}
 		return super.getCapability(capability, facing);
+	}
+	
+	public boolean isItemValidForSlot(int index, ItemStack stack) {
+		return stack.getItem() instanceof ItemUpgrade && ((ItemUpgrade) stack.getItem()).upgradeType == index;
+	}
+	
+	public int getOperationsPerTick() {
+		return 1 + Math.min(getStackInSlot(0).getMaxStackSize(), getStackInSlot(0).getCount());
+	}
+	
+	public int getFortuneLevel() {
+		return Math.min(getStackInSlot(1).getMaxStackSize(), getStackInSlot(1).getCount());
+	}
+	
+	public int getRadius() {
+		return 1 + 2 * Math.min(getStackInSlot(2).getMaxStackSize(), getStackInSlot(2).getCount());
 	}
 	
 }

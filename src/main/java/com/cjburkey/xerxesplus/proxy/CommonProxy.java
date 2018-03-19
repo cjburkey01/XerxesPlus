@@ -7,11 +7,12 @@ import com.cjburkey.xerxesplus.block.BlockContainerBasic;
 import com.cjburkey.xerxesplus.block.BlockContainerExtreme;
 import com.cjburkey.xerxesplus.block.BlockQuarry;
 import com.cjburkey.xerxesplus.block.BlockXpStore;
-import com.cjburkey.xerxesplus.config.ModConfig;
 import com.cjburkey.xerxesplus.container.ContainerInventory;
 import com.cjburkey.xerxesplus.container.ContainerInventory.InventoryDefinition;
+import com.cjburkey.xerxesplus.container.ContainerQuarry;
 import com.cjburkey.xerxesplus.crafting.FurnaceRecipe;
 import com.cjburkey.xerxesplus.crafting.PounderRecipe;
+import com.cjburkey.xerxesplus.gui.GuiContainerQuarry;
 import com.cjburkey.xerxesplus.gui.GuiHandler;
 import com.cjburkey.xerxesplus.gui.GuiHandler.GuiRegister;
 import com.cjburkey.xerxesplus.item.ModItems;
@@ -48,7 +49,14 @@ public class CommonProxy {
 		guiAdvancedContainerId = GuiHandler.addGui(new GuiInventoryRegister(BlockContainerAdvanced.INV_DEF, GB + "GuiContainerAdvanced"));
 		guiExtremeContainerId = GuiHandler.addGui(new GuiInventoryRegister(BlockContainerExtreme.INV_DEF, GB + "GuiContainerExtreme"));
 		guiXpStoreId = GuiHandler.addGui(new GuiInventoryRegister(BlockXpStore.INV_DEF, GB + "GuiContainerXpStore"));
-		guiQuarryId = GuiHandler.addGui(new GuiInventoryRegister(BlockQuarry.INV_DEF, GB + "GuiContainerQuarry"));
+		guiQuarryId = GuiHandler.addGui(new GuiRegister() {
+			public Object onServer(EntityPlayer player, World world, int x, int y, int z) {
+				return new ContainerQuarry(player.inventory, (IInventory) world.getTileEntity(new BlockPos(x, y, z)));
+			}
+			public Object onClient(EntityPlayer player, World world, int x, int y, int z) {
+				return new GuiContainerQuarry(player.inventory, (TileEntityInventory) world.getTileEntity(new BlockPos(x, y, z)));
+			}
+		});
 	}
 	
 	public void construction(FMLConstructionEvent e) {

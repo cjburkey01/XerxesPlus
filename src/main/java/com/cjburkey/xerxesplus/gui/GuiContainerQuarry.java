@@ -3,6 +3,7 @@ package com.cjburkey.xerxesplus.gui;
 import com.cjburkey.xerxesplus.ModInfo;
 import com.cjburkey.xerxesplus.block.BlockQuarry;
 import com.cjburkey.xerxesplus.config.ModConfig;
+import com.cjburkey.xerxesplus.container.ContainerQuarry;
 import com.cjburkey.xerxesplus.packet.PacketHandler;
 import com.cjburkey.xerxesplus.packet.PacketQuarryToServer;
 import com.cjburkey.xerxesplus.tile.TileEntityInventory;
@@ -19,7 +20,7 @@ public class GuiContainerQuarry extends GuiInventoryBase {
 	private static String posString = "0, 0, 0";
 	
 	public GuiContainerQuarry(IInventory player, TileEntityInventory inventory) {
-		super(BlockQuarry.INV_DEF, TEXTURE, player, inventory);
+		super(new ContainerQuarry(player, inventory), BlockQuarry.INV_DEF, TEXTURE, player, inventory);
 	}
 	
 	public void drawGuiContainerForegroundLayer(int mx, int my) {

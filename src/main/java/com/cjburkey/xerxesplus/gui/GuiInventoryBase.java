@@ -5,9 +5,9 @@ import com.cjburkey.xerxesplus.container.ContainerInventory.InventoryDefinition;
 import com.cjburkey.xerxesplus.tile.TileEntityInventory;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.Mod;
 
 public class GuiInventoryBase extends GuiContainer {
 	
@@ -17,7 +17,11 @@ public class GuiInventoryBase extends GuiContainer {
 	protected final InventoryDefinition invDef;
 	
 	public GuiInventoryBase(InventoryDefinition invDef, ResourceLocation texture, IInventory player, TileEntityInventory inventory) {
-		super(new ContainerInventory(invDef, player, inventory));
+		this(new ContainerInventory(invDef, player, inventory), invDef, texture, player, inventory);
+	}
+	
+	public GuiInventoryBase(Container container, InventoryDefinition invDef, ResourceLocation texture, IInventory player, TileEntityInventory inventory) {
+		super(container);
 		this.invDef = invDef;
 		playerInv = player;
 		this.inventory = inventory;
@@ -27,9 +31,9 @@ public class GuiInventoryBase extends GuiContainer {
 	}
 	
 	public void drawScreen(int mx, int my, float partials) {
-		this.drawDefaultBackground();
+		drawDefaultBackground();
 		super.drawScreen(mx, my, partials);
-		this.renderHoveredToolTip(mx, my);
+		renderHoveredToolTip(mx, my);
 	}
 	
 	protected void drawGuiContainerBackgroundLayer(float partial, int mx, int my) {

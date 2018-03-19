@@ -23,5 +23,8 @@ xp_levels=Levels
 xp_singles=Experience
 
 item.ingot_meticulum.name=Meticulum Ingot
+item.upgrade_0.name=Operations-Per-Tick Upgrade Card
+item.upgrade_1.name=Fortune Upgrade Card
+item.upgrade_2.name=Radius Upgrade Card
 
 xerxessplus.config.title=XerxesPlus Configuration
