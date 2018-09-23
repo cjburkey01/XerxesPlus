@@ -24,11 +24,10 @@ hs_err_pid*
 *.DS_Store
 /target/
 
-gradle/*
-gradlew
 .gradle/*
 build/*
 eclipse/
+idea/
 run/
 .settings/*
 .classpath
@@ -36,4 +35,7 @@ run/
 bin/
 *.launch
 lib/
-gradlew.bat
+*.iml
+*.ipr
+*.iws
+gradle/
