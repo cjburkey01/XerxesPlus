@@ -8,11 +8,11 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiContainerTrash extends GuiInventoryBase {
-	
-	public static ResourceLocation TEXTURE = new ResourceLocation(ModInfo.MODID, "textures/gui/container/gui_trash.png");
-	
-	public GuiContainerTrash(IInventory player, TileEntityInventory inventory) {
-		super(new ContainerTrash(player, inventory), BlockTrash.INV_DEF, TEXTURE, player, inventory);
-	}
-	
+
+    private static ResourceLocation TEXTURE = new ResourceLocation(ModInfo.MODID, "textures/gui/container/gui_trash.png");
+
+    public GuiContainerTrash(IInventory player, TileEntityInventory inventory) {
+        super(new ContainerTrash(player, inventory), BlockTrash.INV_DEF, TEXTURE, player, inventory);
+    }
+
 }

@@ -1,29 +1,29 @@
 {
-    "type": "forge:ore_shaped",
-    "pattern": [
-        "wyw",
-        "xzx",
-        "xxx"
-    ],
-    "key": {
-        "x": {
-            "type": "forge:ore_dict",
-            "ore": "plankWood"
-        },
-        "y": {
-            "type": "forge:ore_dict",
-            "ore": "plateIron"
-        },
-        "z": {
-            "type": "forge:ore_dict",
-            "ore": "chestWood"
-        },
-        "w": {
-            "type": "forge:ore_dict",
-            "ore": "ingotIron"
-        }
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "wyw",
+    "xzx",
+    "xxx"
+  ],
+  "key": {
+    "x": {
+      "type": "forge:ore_dict",
+      "ore": "plankWood"
     },
-    "result": {
-        "item": "xerxesplus:block_container_basic"
+    "y": {
+      "type": "forge:ore_dict",
+      "ore": "plateIron"
+    },
+    "z": {
+      "type": "forge:ore_dict",
+      "ore": "chestWood"
+    },
+    "w": {
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
     }
+  },
+  "result": {
+    "item": "xerxesplus:block_container_basic"
+  }
 }

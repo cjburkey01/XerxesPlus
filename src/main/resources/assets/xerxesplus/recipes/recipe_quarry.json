@@ -1,28 +1,28 @@
 {
-    "type": "forge:ore_shaped",
-    "pattern": [
-        "xyx",
-        "zyz",
-        "vvv"
-    ],
-    "key": {
-        "x": {
-            "item": "minecraft:diamond_pickaxe"
-        },
-        "y": {
-            "type": "forge:ore_dict",
-            "ore": "plateMeticulum"
-        },
-        "z": {
-            "type": "forge:ore_dict",
-            "ore": "dustRedstone"
-        },
-        "v": {
-            "type": "forge:ore_dict",
-            "ore": "gemDiamond"
-        }
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "xyx",
+    "zyz",
+    "vvv"
+  ],
+  "key": {
+    "x": {
+      "item": "minecraft:diamond_pickaxe"
     },
-    "result": {
-        "item": "xerxesplus:block_quarry"
+    "y": {
+      "type": "forge:ore_dict",
+      "ore": "plateMeticulum"
+    },
+    "z": {
+      "type": "forge:ore_dict",
+      "ore": "dustRedstone"
+    },
+    "v": {
+      "type": "forge:ore_dict",
+      "ore": "gemDiamond"
     }
+  },
+  "result": {
+    "item": "xerxesplus:block_quarry"
+  }
 }

@@ -1,24 +1,24 @@
 {
-    "type": "forge:ore_shaped",
-    "pattern": [
-        "xzx",
-        "xyx",
-        "xxx"
-    ],
-    "key": {
-        "x": {
-            "type": "forge:ore_dict",
-            "ore": "ingotIron"
-        },
-        "y": {
-            "item": "xerxesplus:block_container_basic"
-        },
-        "z": {
-            "type": "forge:ore_dict",
-            "ore": "ingotGold"
-        }
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "xzx",
+    "xyx",
+    "xxx"
+  ],
+  "key": {
+    "x": {
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
     },
-    "result": {
-        "item": "xerxesplus:block_container_advanced"
+    "y": {
+      "item": "xerxesplus:block_container_basic"
+    },
+    "z": {
+      "type": "forge:ore_dict",
+      "ore": "ingotGold"
     }
+  },
+  "result": {
+    "item": "xerxesplus:block_container_advanced"
+  }
 }

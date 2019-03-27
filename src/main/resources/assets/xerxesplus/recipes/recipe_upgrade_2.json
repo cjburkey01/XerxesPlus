@@ -1,29 +1,29 @@
 {
-    "type": "forge:ore_shaped",
-    "pattern": [
-        "xyx",
-        "zzz",
-        "xvx"
-    ],
-    "key": {
-        "x": {
-            "type": "forge:ore_dict",
-            "ore": "ingotGold"
-        },
-        "y": {
-            "type": "forge:ore_dict",
-            "ore": "plateMeticulum"
-        },
-        "z": {
-            "type": "forge:ore_dict",
-            "ore": "dustRedstone"
-        },
-        "v": {
-            "type": "forge:ore_dict",
-            "ore": "plateIron"
-        }
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "xyx",
+    "zzz",
+    "xvx"
+  ],
+  "key": {
+    "x": {
+      "type": "forge:ore_dict",
+      "ore": "ingotGold"
     },
-    "result": {
-        "item": "xerxesplus:upgrade_2"
+    "y": {
+      "type": "forge:ore_dict",
+      "ore": "plateMeticulum"
+    },
+    "z": {
+      "type": "forge:ore_dict",
+      "ore": "dustRedstone"
+    },
+    "v": {
+      "type": "forge:ore_dict",
+      "ore": "plateIron"
     }
+  },
+  "result": {
+    "item": "xerxesplus:upgrade_2"
+  }
 }

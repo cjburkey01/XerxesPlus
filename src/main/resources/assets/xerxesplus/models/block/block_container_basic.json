@@ -1,12 +1,12 @@
 {
-    "parent": "block/cube",
-    "textures": {
-        "particle": "xerxesplus:blocks/block_container_basic",
-        "down": "xerxesplus:blocks/block_container_basic_bottom",
-        "up": "xerxesplus:blocks/block_container_basic_top",
-        "north": "xerxesplus:blocks/block_container_basic",
-        "east": "xerxesplus:blocks/block_container_basic",
-        "south": "xerxesplus:blocks/block_container_basic",
-        "west": "xerxesplus:blocks/block_container_basic"
-    }
+  "parent": "block/cube",
+  "textures": {
+    "particle": "xerxesplus:blocks/block_container_basic",
+    "down": "xerxesplus:blocks/block_container_basic_bottom",
+    "up": "xerxesplus:blocks/block_container_basic_top",
+    "north": "xerxesplus:blocks/block_container_basic",
+    "east": "xerxesplus:blocks/block_container_basic",
+    "south": "xerxesplus:blocks/block_container_basic",
+    "west": "xerxesplus:blocks/block_container_basic"
+  }
 }

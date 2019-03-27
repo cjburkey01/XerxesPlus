@@ -1,7 +1,7 @@
 {
-    "variants": {
-        "normal": {
-            "model": "xerxesplus:block_meticulum_ore"
-        }
+  "variants": {
+    "normal": {
+      "model": "xerxesplus:block_meticulum_ore"
     }
+  }
 }

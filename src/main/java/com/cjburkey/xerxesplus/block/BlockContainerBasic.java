@@ -4,6 +4,8 @@ import com.cjburkey.xerxesplus.XerxesPlus;
 import com.cjburkey.xerxesplus.container.ContainerInventory.InventoryDefinition;
 import com.cjburkey.xerxesplus.proxy.CommonProxy;
 import com.cjburkey.xerxesplus.tile.TileEntityContainerBasic;
+import java.util.Objects;
+import javax.annotation.Nonnull;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -19,34 +21,35 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class BlockContainerBasic extends BlockContainer {
-	
-	public static InventoryDefinition INV_DEF = new InventoryDefinition(176, 166, 9, 3, 8, 18, 58, 8, 84);
-	
-	public BlockContainerBasic() {
-		super(Material.IRON);
-		setHardness(1.0f);
-		setHarvestLevel("pickaxe", 1);
-		setSoundType(SoundType.METAL);
-	}
-	
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer ply, EnumHand hand, EnumFacing facing, float x, float y, float z) {
-		if (!world.isRemote) {
-			ply.openGui(XerxesPlus.instance, CommonProxy.guiBasicContainerId, world, pos.getX(), pos.getY(), pos.getZ());
-		}
-		return true;
-	}
-	
-	public void breakBlock(World world, BlockPos pos, IBlockState state) {
-		InventoryHelper.dropInventoryItems(world, pos, (IInventory) world.getTileEntity(pos));
-		super.breakBlock(world, pos, state);
-	}
-	
-	public EnumBlockRenderType getRenderType(IBlockState state) {
-		return EnumBlockRenderType.MODEL;
-	}
-	
-	public TileEntity createNewTileEntity(World worldIn, int meta) {
-		return new TileEntityContainerBasic();
-	}
-	
+
+    public static InventoryDefinition INV_DEF = new InventoryDefinition(176, 166, 9, 3, 8, 18, 58, 8, 84);
+
+    BlockContainerBasic() {
+        super(Material.IRON);
+        setHardness(1.0f);
+        setHarvestLevel("pickaxe", 1);
+        setSoundType(SoundType.METAL);
+    }
+
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer ply, EnumHand hand, EnumFacing facing, float x, float y, float z) {
+        if (!world.isRemote) {
+            ply.openGui(XerxesPlus.instance, CommonProxy.guiBasicContainerId, world, pos.getX(), pos.getY(), pos.getZ());
+        }
+        return true;
+    }
+
+    public void breakBlock(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
+        InventoryHelper.dropInventoryItems(world, pos, (IInventory) Objects.requireNonNull(world.getTileEntity(pos)));
+        super.breakBlock(world, pos, state);
+    }
+
+    @Nonnull
+    public EnumBlockRenderType getRenderType(IBlockState state) {
+        return EnumBlockRenderType.MODEL;
+    }
+
+    public TileEntity createNewTileEntity(@Nonnull World worldIn, int meta) {
+        return new TileEntityContainerBasic();
+    }
+
 }

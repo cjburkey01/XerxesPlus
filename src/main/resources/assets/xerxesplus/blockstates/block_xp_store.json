@@ -1,7 +1,7 @@
 {
-    "variants": {
-        "normal": {
-            "model": "xerxesplus:block_xp_store"
-        }
+  "variants": {
+    "normal": {
+      "model": "xerxesplus:block_xp_store"
     }
+  }
 }

@@ -1,7 +1,7 @@
 {
-    "variants": {
-        "normal": {
-            "model": "xerxesplus:block_trash"
-        }
+  "variants": {
+    "normal": {
+      "model": "xerxesplus:block_trash"
     }
+  }
 }

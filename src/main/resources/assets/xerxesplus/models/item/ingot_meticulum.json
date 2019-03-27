@@ -1,6 +1,6 @@
 {
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "xerxesplus:items/ingot_meticulum"
-    }
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "xerxesplus:items/ingot_meticulum"
+  }
 }

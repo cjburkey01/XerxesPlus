@@ -1,6 +1,6 @@
 {
-    "parent": "block/cube_all",
-    "textures": {
-        "all": "xerxesplus:blocks/block_meticulum_ore"
-    }
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "xerxesplus:blocks/block_meticulum_ore"
+  }
 }
