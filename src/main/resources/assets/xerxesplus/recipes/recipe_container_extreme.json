@@ -1,19 +1,19 @@
 {
   "type": "forge:ore_shaped",
   "pattern": [
-    "zzz",
-    "xyx",
-    "xxx"
+    "mmm",
+    "gcg",
+    "ggg"
   ],
   "key": {
-    "x": {
+    "g": {
       "type": "forge:ore_dict",
       "ore": "ingotGold"
     },
-    "y": {
+    "c": {
       "item": "xerxesplus:block_container_advanced"
     },
-    "z": {
+    "m": {
       "type": "forge:ore_dict",
       "ore": "ingotMeticulum"
     }

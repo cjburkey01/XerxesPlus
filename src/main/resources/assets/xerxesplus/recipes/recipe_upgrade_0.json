@@ -1,24 +1,24 @@
 {
   "type": "forge:ore_shaped",
   "pattern": [
-    "xyx",
-    "zzz",
-    "xvx"
+    "dpd",
+    "rrr",
+    "did"
   ],
   "key": {
-    "x": {
+    "d": {
       "type": "forge:ore_dict",
       "ore": "gemDiamond"
     },
-    "y": {
+    "p": {
       "type": "forge:ore_dict",
       "ore": "plateDiamond"
     },
-    "z": {
+    "r": {
       "type": "forge:ore_dict",
       "ore": "dustRedstone"
     },
-    "v": {
+    "i": {
       "type": "forge:ore_dict",
       "ore": "plateIron"
     }

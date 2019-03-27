@@ -1,24 +1,24 @@
 {
   "type": "forge:ore_shaped",
   "pattern": [
-    "wyw",
-    "xzx",
-    "xxx"
+    "nin",
+    "wcw",
+    "www"
   ],
   "key": {
-    "x": {
+    "w": {
       "type": "forge:ore_dict",
       "ore": "plankWood"
     },
-    "y": {
+    "i": {
       "type": "forge:ore_dict",
       "ore": "plateIron"
     },
-    "z": {
+    "c": {
       "type": "forge:ore_dict",
       "ore": "chestWood"
     },
-    "w": {
+    "n": {
       "type": "forge:ore_dict",
       "ore": "ingotIron"
     }

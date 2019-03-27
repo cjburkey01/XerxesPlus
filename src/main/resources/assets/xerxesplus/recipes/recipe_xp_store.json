@@ -1,28 +1,28 @@
 {
   "type": "forge:ore_shaped",
   "pattern": [
-    "yxy",
-    "zwz",
-    "vvv"
+    "gmg",
+    "iri",
+    "sss"
   ],
   "key": {
-    "x": {
+    "m": {
       "type": "forge:ore_dict",
       "ore": "plateMeticulum"
     },
-    "y": {
+    "g": {
       "type": "forge:ore_dict",
       "ore": "ingotGold"
     },
-    "z": {
+    "i": {
       "type": "forge:ore_dict",
       "ore": "ingotIron"
     },
-    "w": {
+    "r": {
       "type": "forge:ore_dict",
       "ore": "dustRedstone"
     },
-    "v": {
+    "s": {
       "type": "forge:ore_dict",
       "ore": "cobblestone"
     }

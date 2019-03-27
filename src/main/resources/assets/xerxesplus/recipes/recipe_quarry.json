@@ -1,23 +1,23 @@
 {
   "type": "forge:ore_shaped",
   "pattern": [
-    "xyx",
-    "zyz",
-    "vvv"
+    "pmp",
+    "rmr",
+    "ddd"
   ],
   "key": {
-    "x": {
+    "p": {
       "item": "minecraft:diamond_pickaxe"
     },
-    "y": {
+    "m": {
       "type": "forge:ore_dict",
       "ore": "plateMeticulum"
     },
-    "z": {
+    "r": {
       "type": "forge:ore_dict",
       "ore": "dustRedstone"
     },
-    "v": {
+    "d": {
       "type": "forge:ore_dict",
       "ore": "gemDiamond"
     }

@@ -1,16 +1,20 @@
 [
-{
-  "modid": "xerxesplus",
-  "name": "Xerxes Plus",
-  "description": "A mod that adds many power-based items and such.",
-  "version": "${mcversion}_${version}",
-  "mcversion": "${mcversion}",
-  "url": "https://github.com/cjburkey01/XerxesPlus",
-  "updateUrl": "",
-  "authorList": [ "CJ Burkey" ],
-  "credits": "The Forge and FML guys, for making Forge.",
-  "logoFile": "logo64.png",
-  "screenshots": [],
-  "dependencies": [ "jaopca" ]
-}
+  {
+    "modid": "xerxesplus",
+    "name": "Xerxes Plus",
+    "description": "Adds useful quality-of-life and/or energy-based items",
+    "version": "${mcversion}_${version}",
+    "mcversion": "${mcversion}",
+    "url": "https://github.com/cjburkey01/XerxesPlus",
+    "updateUrl": "",
+    "authorList": [
+      "CJ Burkey"
+    ],
+    "credits": "The Forge guys for making Forge",
+    "logoFile": "logo64.png",
+    "screenshots": [],
+    "dependencies": [
+      "jaopca"
+    ]
+  }
 ]
